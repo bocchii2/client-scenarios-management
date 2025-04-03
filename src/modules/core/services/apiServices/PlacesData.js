@@ -9,14 +9,19 @@ export const PLACES_DATA = [
     imgUrl: "/public/carousel-1.svg",
     available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
-    pricePerHour: 250,
+    rates: {
+      pricePerHour: 250,
+      halfDayPrice: 1000,
+      fullDayPrice: 2000,
+      weekendDaySurchargePercent: 15,
+    },
     area: 300,
     features: [
       "Una pantalla gigante de 35 módulos de 4.48 metros de largo por 2,40 será instalada",
       "Sistema de alta calidad para videoconferencias y programas",
       "El sistema está conformado por 40 equipos para el montaje",
     ],
-    services: {
+    internalServices: {
       wifi: true,
       wifiPricePerHourAditional: 10,
       airConditioner: true,
@@ -43,6 +48,24 @@ export const PLACES_DATA = [
         squareMeters: 300,
       },
     },
+    additionalServices: [
+      {
+        serviceName: "Catering",
+        available: true,
+      },
+      {
+        serviceName: "Transporte",
+        available: true,
+      },
+      {
+        serviceName: "Guias",
+        available: true,
+      },
+      {
+        serviceName: "Publicidad",
+        available: true,
+      },
+    ],
   },
   {
     id: 2,
@@ -54,7 +77,12 @@ export const PLACES_DATA = [
     imgUrl: "/public/carousel-2.svg",
     available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
-    pricePerHour: 100,
+    rates: {
+      pricePerHour: 100,
+      halfDayPrice: 400,
+      fullDayPrice: 800,
+      weekendDaySurchargePercent: 10,
+    },
     area: 300,
     features: [
       "Área de construcción de 5.471 m²",
@@ -65,7 +93,7 @@ export const PLACES_DATA = [
       "La cultura Manteña en su esplendor",
       "La silla Manteña, Cuatro incensiarios, Símbolos manteños que hacen referencia a los cuatro elementos: agua, aire, tierra y fuego",
     ],
-    services: {
+    internalServices: {
       wifi: true,
       wifiPricePerHourAditional: 10,
       airConditioner: false,
@@ -92,6 +120,24 @@ export const PLACES_DATA = [
         squareMeters: 300,
       },
     },
+    additionalServices: [
+      {
+        serviceName: "Catering",
+        available: true,
+      },
+      {
+        serviceName: "Transporte",
+        available: true,
+      },
+      {
+        serviceName: "Guias",
+        available: true,
+      },
+      {
+        serviceName: "Publicidad",
+        available: true,
+      },
+    ],
   },
   {
     id: 3,
@@ -103,12 +149,17 @@ export const PLACES_DATA = [
     imgUrl: "/public/carousel-3.svg",
     available: false,
     status: "No disponible", // Disponible, No disponible, en mantenimiento, en uso
-    pricePerHour: 150,
+    rates: {
+      pricePerHour: 150,
+      halfDayPrice: 600,
+      fullDayPrice: 1200,
+      weekendDaySurchargePercent: 10,
+    },
     area: 100,
     features: [
       "Pantalla LED central, que abarca impresionantes dimensiones de 6.40 metros de largo por 5 metros de ancho. Este equipo avanzado consta de 480 módulos LED de alta resolución, complementados por un sistema de sonido excepcional que garantiza una calidad de audio uniforme y envolvente para los 124 asistentes que puede albergar la sala que está climatizada, además cuenta con baterias sanitarias y acceso a internet",
     ],
-    services: {
+    internalServices: {
       wifi: true,
       wifiPricePerHourAditional: 10,
       airConditioner: true,
@@ -135,6 +186,24 @@ export const PLACES_DATA = [
         squareMeters: 296,
       },
     },
+    additionalServices: [
+      {
+        serviceName: "Catering",
+        available: true,
+      },
+      {
+        serviceName: "Transporte",
+        available: true,
+      },
+      {
+        serviceName: "Guias",
+        available: true,
+      },
+      {
+        serviceName: "Publicidad",
+        available: true,
+      },
+    ],
   },
   {
     id: 4,
@@ -146,7 +215,12 @@ export const PLACES_DATA = [
     imgUrl: "/public/carousel-4.svg",
     available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
-    pricePerHour: 500,
+    rates: {
+      pricePerHour: 500,
+      halfDayPrice: 2000,
+      fullDayPrice: 4000,
+      weekendDaySurchargePercent: 20,
+    },
     area: 5000,
     features: [
       "Instalaciones Modernas: Asientos cómodos y visibilidad perfecta.",
@@ -155,7 +229,7 @@ export const PLACES_DATA = [
       "Ubicación Estratégica: En el corazón del campus, con fácil acceso y amplias opciones de estacionamiento.",
       "Seguridad y Comodidad: Personal capacitado y servicios de seguridad para que disfrutes sin preocupaciones.",
     ],
-    services: {
+    internalServices: {
       wifi: true,
       wifiPricePerHourAditional: 10,
       airConditioner: false,
@@ -182,6 +256,24 @@ export const PLACES_DATA = [
         squareMeters: 5000,
       },
     },
+    additionalServices: [
+      {
+        serviceName: "Catering",
+        available: true,
+      },
+      {
+        serviceName: "Transporte",
+        available: true,
+      },
+      {
+        serviceName: "Guias",
+        available: true,
+      },
+      {
+        serviceName: "Publicidad",
+        available: true,
+      },
+    ],
   },
   {
     id: 5,
@@ -193,12 +285,17 @@ export const PLACES_DATA = [
     imgUrl: "/public/carousel-5.svg",
     available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
-    pricePerHour: 50,
+    rates: {
+      pricePerHour: 50,
+      halfDayPrice: 200,
+      fullDayPrice: 400,
+      weekendDaySurchargePercent: 10,
+    },
     area: 100,
     features: [
       "Nuestro personal especializado está listo para atenderte como te mereces. Deléitate con platos preparados por expertos gastronómicos, en una colaboración única entre docentes y estudiantes. ¡Ven y vive una experiencia culinaria extraordinaria!",
     ],
-    services: {
+    internalServices: {
       wifi: true,
       wifiPricePerHourAditional: 10,
       airConditioner: true,
@@ -225,6 +322,24 @@ export const PLACES_DATA = [
         squareMeters: 150,
       },
     },
+    additionalServices: [
+      {
+        serviceName: "Catering",
+        available: true,
+      },
+      {
+        serviceName: "Transporte",
+        available: true,
+      },
+      {
+        serviceName: "Guias",
+        available: true,
+      },
+      {
+        serviceName: "Publicidad",
+        available: true,
+      },
+    ],
   },
   {
     id: 6,
@@ -236,12 +351,17 @@ export const PLACES_DATA = [
     imgUrl: "/public/carousel-1.svg",
     available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
-    pricePerHour: 200,
+    rates: {
+      pricePerHour: 200,
+      halfDayPrice: 800,
+      fullDayPrice: 1600,
+      weekendDaySurchargePercent: 10,
+    },
     area: 150,
     features: [
       "Sumérgete en una experiencia sonora inigualable en nuestra Sala de Conciertos, el escenario perfecto para cada nota y cada emoción. Este espacio está diseñado para elevar cada presentación musical a un nuevo nivel. Ya sea para conciertos íntimos o grandes espectáculos, nuestra sala garantiza una experiencia inolvidable para artistas y espectadores.",
     ],
-    services: {
+    internalServices: {
       wifi: true,
       wifiPricePerHourAditional: 10,
       airConditioner: true,
@@ -266,6 +386,24 @@ export const PLACES_DATA = [
         squareMeters: 150,
       },
     },
+    additionalServices: [
+      {
+        serviceName: "Catering",
+        available: true,
+      },
+      {
+        serviceName: "Transporte",
+        available: true,
+      },
+      {
+        serviceName: "Guias",
+        available: true,
+      },
+      {
+        serviceName: "Publicidad",
+        available: true,
+      },
+    ],
   },
   {
     id: 7,
@@ -277,13 +415,18 @@ export const PLACES_DATA = [
     imgUrl: "/public/carousel-2.svg",
     available: true,
     status: "En mantenimiento", // Disponible, No disponible, en mantenimiento, en uso
-    pricePerHour: 100,
+    rates: {
+      pricePerHour: 100,
+      halfDayPrice: 400,
+      fullDayPrice: 800,
+      weekendDaySurchargePercent: 10,
+    },
     area: 100,
     features: [
       "El Salón de Reuniones perfecto para tus encuentros profesionales. Diseñado para fomentar la colaboración y la productividad, nuestro espacio está equipado con todo lo que necesitas para llevar tus reuniones al siguiente nivel.",
       "Tecnología Moderna: Pantalla de alta definición y sistemas de videoconferencia para presentaciones impecables.",
     ],
-    services: {
+    internalServices: {
       wifi: true,
       wifiPricePerHourAditional: 10,
       airConditioner: true,
@@ -312,6 +455,24 @@ export const PLACES_DATA = [
         squareMeters: 100,
       },
     },
+    additionalServices: [
+      {
+        serviceName: "Catering",
+        available: true,
+      },
+      {
+        serviceName: "Transporte",
+        available: true,
+      },
+      {
+        serviceName: "Guias",
+        available: true,
+      },
+      {
+        serviceName: "Publicidad",
+        available: true,
+      },
+    ],
   },
   {
     id: 8,
@@ -323,13 +484,18 @@ export const PLACES_DATA = [
     imgUrl: "/public/carousel-3.svg",
     available: false,
     status: "No disponible", // Disponible, No disponible, en mantenimiento, en uso
-    pricePerHour: 150,
+    rates: {
+      pricePerHour: 150,
+      halfDayPrice: 600,
+      fullDayPrice: 1200,
+      weekendDaySurchargePercent: 10,
+    },
     area: 100,
     features: [
       "Área de construcción de 127,9 m²",
       "Instalaciones Modernas: Asientos cómodos, visibilidad perfecta y tecnología avanzada para una experiencia superior.",
     ],
-    services: {
+    internalServices: {
       wifi: true,
       wifiPricePerHourAditional: 10,
       airConditioner: true,
@@ -340,11 +506,6 @@ export const PLACES_DATA = [
       soundSystemPricePerHourAditional: 20,
       display: true,
       displayPricePerHourAditional: 5,
-      chairs: 100,
-      tables: 2,
-      bathrooms: 2,
-      bar: false,
-      kitchen: false,
       parking: true,
       security: true,
       cleaning: true,
@@ -358,6 +519,24 @@ export const PLACES_DATA = [
         squareMeters: 100,
       },
     },
+    additionalServices: [
+      {
+        serviceName: "Catering",
+        available: true,
+      },
+      {
+        serviceName: "Transporte",
+        available: true,
+      },
+      {
+        serviceName: "Guias",
+        available: true,
+      },
+      {
+        serviceName: "Publicidad",
+        available: true,
+      },
+    ],
   },
   {
     id: 9,
@@ -368,7 +547,12 @@ export const PLACES_DATA = [
     imgUrl: "/public/carousel-4.svg",
     available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
-    pricePerHour: 200,
+    rates: {
+      pricePerHour: 200,
+      halfDayPrice: 800,
+      fullDayPrice: 1600,
+      weekendDaySurchargePercent: 10,
+    },
     area: 150,
     features: [
       "Tecnología Moderna: Pantallas de alta definición, proyectores y sistemas de videoconferencia para presentaciones impecables.",
@@ -376,7 +560,7 @@ export const PLACES_DATA = [
       "Espacios Flexibles: Configuraciones adaptables para reuniones pequeñas o grandes conferencias.",
       "Ambiente Profesional: Iluminación natural y ambiente tranquilo para maximizar la concentración y la creatividad.",
     ],
-    services: {
+    internalServices: {
       wifi: true,
       wifiPricePerHourAditional: 10,
       airConditioner: true,
@@ -387,11 +571,6 @@ export const PLACES_DATA = [
       soundSystemPricePerHourAditional: 20,
       display: true,
       displayPricePerHourAditional: 5,
-      chairs: 150,
-      tables: 2,
-      bathrooms: 2,
-      bar: false,
-      kitchen: false,
       parking: true,
       security: true,
       cleaning: true,
@@ -405,6 +584,24 @@ export const PLACES_DATA = [
         squareMeters: 150,
       },
     },
+    additionalServices: [
+      {
+        serviceName: "Catering",
+        available: true,
+      },
+      {
+        serviceName: "Transporte",
+        available: true,
+      },
+      {
+        serviceName: "Guias",
+        available: true,
+      },
+      {
+        serviceName: "Publicidad",
+        available: true,
+      },
+    ],
   },
 ];
 
