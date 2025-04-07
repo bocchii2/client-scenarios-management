@@ -1,56 +1,46 @@
-// here create a new instance of axios with the base url, and a base config with get, post, put, delete methods
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "http://localhost:3000/api/v1",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+class ApiService {
+  constructor(baseUrl) {
+    this.axiosInstance = axios.create({
+      baseURL: baseUrl,
+      timeout: 10000,
+    });
 
-export const get = async (url) => {
-  try {
-    const response = await api.get(url);
-    return response.data;
-  } catch (error) {
-    console.error(error);
+    this.axiosInstance.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        // Handle error globally
+        console.error("API Error:", error);
+        return Promise.reject(error);
+      }
+    );
   }
-};
 
-export const getById = async (url, id) => {
-  try {
-    const response = await api.get(`${url}/${id}`);
+  async get(endpoint) {
+    const response = await this.api.get(endpoint);
     return response.data;
-  } catch (error) {
-    console.error(error);
   }
-};
 
-export const post = async (url, data) => {
-  try {
-    const response = await api.post(url, data);
+  async post(endpoint, data) {
+    const response = await this.api.post(endpoint, data);
     return response.data;
-  } catch (error) {
-    console.error(error);
   }
-};
 
-export const put = async (url, data) => {
-  try {
-    const response = await api.put(url, data);
+  async put(endpoint, data) {
+    const response = await this.api.put(endpoint, data);
     return response.data;
-  } catch (error) {
-    console.error(error);
   }
-};
 
-export const remove = async (url) => {
-  try {
-    const response = await api.delete(url);
+  async delete(endpoint) {
+    const response = await this.api.delete(endpoint);
     return response.data;
-  } catch (error) {
-    console.error(error);
   }
-};
 
-export default api;
+  async patch(endpoint, data) {
+    const response = await this.api.patch(endpoint, data);
+    return response.data;
+  }
+}
+
+export default ApiService;

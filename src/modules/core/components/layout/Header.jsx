@@ -1,9 +1,10 @@
 import React from "react";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import useUserStore from "../../../../store/user";
+import ProfileUser from "./profile/ProfileUser";
 
 const Header = () => {
+    const { loggedIn } = useUserStore((state) => state.user);
   return (
     <div className="w-screen h-auto px-3 bg-[rgb(16,105,165)] text-white flex flex-col justify-around items-center">
       <div className="py-5 text-center">
@@ -44,15 +45,18 @@ const Header = () => {
           </div>
         </nav>
         <div className="list-none flex gap-2 items-center justify-center">
-          <a href="">
-            <FaInstagram size={20} />
-          </a>
-          <a href="">
-            <FaFacebook />
-          </a>
-          <a href="">
-            <FaXTwitter />
-          </a>
+        {loggedIn ? (
+          <ProfileUser />
+        ) : (
+          <div>
+            <Link
+              to="/login"
+              className="py-2 px-3 bg-transparent text-white border-1 border-transparent hover:bg-white hover:text-[rgb(16,105,165)] cursor-pointer transition-all duration-100 focus-within:outline-none "
+            >
+              Iniciar sesión
+            </Link>
+          </div>
+        )}
         </div>
       </div>
     </div>

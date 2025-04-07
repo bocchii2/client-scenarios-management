@@ -7,6 +7,9 @@ import CotizacionesView from "./modules/core/pages/CotizacionesView";
 import ServiciosView from "./modules/core/pages/ServiciosView";
 import HomeView from "./modules/core/pages/HomeView";
 import { NotificationProvider } from "./providers/NotificationProvider";
+import LoginView from "./modules/auth/pages/LoginView";
+import RegisterView from "./modules/auth/pages/RegisterView";
+import AuthLayout from "./modules/auth/AuthLayout";
 
 const App = () => {
   return (
@@ -14,7 +17,10 @@ const App = () => {
       <NotificationProvider>
         <Routes>
           <Route path="*" element={<div>Not Found</div>} />
-
+          <Route path="/auth" element={<AuthLayout />}>
+            <Route path="login" element={<LoginView />} />
+            <Route path="register" element={<RegisterView />} />
+          </Route>
           <Route element={<CoreLayout />}>
             <Route path="" element={<HomeView />} />
             <Route path="/uleam">

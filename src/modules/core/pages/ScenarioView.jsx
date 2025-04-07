@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import Button from "../../../components/ui/Button/Button";
 import carouselItems from "../models/CarouselItems";
@@ -14,17 +14,22 @@ import GeneralTabContent from "../components/layout/ScenarioViewTabsContent/Gene
 import TechnicalInfoTabContent from "../components/layout/ScenarioViewTabsContent/TechnicalInfoTabContent";
 import Separator from "../../../components/ui/separator/Separator";
 import imgPlaceholder from "../../../assets/placeholder.svg";
-import Modal from "../../../components/ui/Modal/Modal";
 import useModal from "../hooks/useModal";
-import Input from "../../../components/ui/form/input/Input";
 import RequesRentalForm from "../components/layout/Forms/RequesRentalForm";
-/* import useForm from "../hooks/useForm";
-import useUserStore from "../../../store/user"; */
+import { useEffect } from "react";
+import useUserStore from "../../../store/user";
+import NoLoginDialog from "../components/ui/dialog/NoLoginDialog";
 
 const ScenarioView = () => {
   const { idScenario } = useParams();
-  const { closeModal, isOpen, openModal } = useModal();
+  const {
+    closeModal: closeRentalFormModal,
+    isOpen: isOpenRentalFormModal,
+    openModal: openRentalFormModal,
+  } = useModal();
+  const { loggedIn } = useUserStore((state) => state.user);
 
+  // cambiar esto por el estado global
   const scenario = PLACES_DATA.find(
     (place) => place.id === parseInt(idScenario)
   );
@@ -84,15 +89,22 @@ const ScenarioView = () => {
         <div className="w-full my-3 md:m-0 md:w-auto">
           <Button
             label={"Crear solicitud de reserva"}
-            onClick={openModal}
+            onClick={openRentalFormModal}
             variant="primary"
           />
-          <RequesRentalForm
-            closeModal={closeModal}
-            isOpen={isOpen}
-            scenario={scenario}
-            title={"Generar solicitud"}
-          />
+          {loggedIn ? (
+            <RequesRentalForm
+              closeModal={closeRentalFormModal}
+              isOpen={isOpenRentalFormModal}
+              scenario={scenario}
+              title={"Generar solicitud"}
+            />
+          ) : (
+            <NoLoginDialog
+              isOpen={isOpenRentalFormModal}
+              closeModal={closeRentalFormModal}
+            />
+          )}
         </div>
       </div>
       <div className="flex flex-col p-3 gap-1 md:gap-3 md:flex-row">

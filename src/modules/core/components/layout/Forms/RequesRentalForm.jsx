@@ -8,10 +8,16 @@ import Separator from "../../../../../components/ui/separator/Separator";
 import Checkbox from "../../../../../components/ui/form/checkbox/Checkbox";
 import { Link } from "react-router-dom";
 import { FaCalendar, FaFile } from "react-icons/fa6";
+import TermsAndCoditionDialog from "./TermsAndCoditionDialog";
+import useModal from "../../../hooks/useModal";
 
 const RequesRentalForm = ({ isOpen, closeModal, title, scenario }) => {
-  const DISABLED_INPUT_STUDENT_DATA = true; // cambiar a true para deshabilitar los inputs
-
+  const DISABLED_STUDENT_AND_PLACE_DATA = true; // cambiar a true para deshabilitar los inputs
+  const {
+    closeModal: closeTermsAndCoditionModal,
+    isOpen: isOpenTermsAndCoditionModal,
+    openModal: openTermsAndCoditionModal,
+  } = useModal();
   // usar el servicio para consular el lugar por id
   const user = useUserStore((state) => state.user);
   const { formData, errors, handleChange, handleSubmit, loading, cleanErrors } =
@@ -59,7 +65,7 @@ const RequesRentalForm = ({ isOpen, closeModal, title, scenario }) => {
               placeholder="Nombre completo"
               id="name"
               error={errors.name}
-              disabled={DISABLED_INPUT_STUDENT_DATA}
+              disabled={DISABLED_STUDENT_AND_PLACE_DATA}
             />
             <Input
               value={formData.userData.lastname}
@@ -69,7 +75,7 @@ const RequesRentalForm = ({ isOpen, closeModal, title, scenario }) => {
               placeholder="Apellido completo"
               id={"lastname"}
               error={errors.lastname}
-              disabled={DISABLED_INPUT_STUDENT_DATA}
+              disabled={DISABLED_STUDENT_AND_PLACE_DATA}
             />
           </div>
           <div className="flex flex-col md:flex-row gap-1">
@@ -82,7 +88,7 @@ const RequesRentalForm = ({ isOpen, closeModal, title, scenario }) => {
               id={"email"}
               error={errors.email}
               isRequired={true}
-              disabled={DISABLED_INPUT_STUDENT_DATA}
+              disabled={DISABLED_STUDENT_AND_PLACE_DATA}
             />
             <Input
               value={formData.userData.phone}
@@ -93,7 +99,23 @@ const RequesRentalForm = ({ isOpen, closeModal, title, scenario }) => {
               id={"phone"}
               error={errors.phone}
               isRequired={true}
-              disabled={DISABLED_INPUT_STUDENT_DATA}
+              disabled={DISABLED_STUDENT_AND_PLACE_DATA}
+            />
+          </div>
+          <Separator color={"gray"} />
+          <div>
+            <h2 className="text-sm font-bold text-gray-700 pb-5">
+              Datos del escenario
+            </h2>
+            <Input
+              value={formData.scenarioData.scenarioName}
+              onChange={handleChange}
+              name="scenarioName"
+              label="Nombre del escenario"
+              placeholder="Nombre del escenario"
+              id={"scenarioName"}
+              error={errors.scenarioName}
+              disabled={DISABLED_STUDENT_AND_PLACE_DATA}
             />
           </div>
           <Separator color={"gray"} />
@@ -151,12 +173,28 @@ const RequesRentalForm = ({ isOpen, closeModal, title, scenario }) => {
             <h2 className="text-sm font-bold text-gray-700 pb-5">
               Terminos y condiciones
             </h2>
-            <Checkbox
-              label={`Estoy de acuerdo con los terminos y condiciones de uso del escenario`}
-              onChange={handleChange}
-              name={"termsAndConditions"}
-              id={"termsAndConditions"}
-              error={errors.termsAndConditions}
+            <div>
+              <Checkbox
+                label={`Estoy de acuerdo con los terminos y condiciones de uso del escenario`}
+                onChange={handleChange}
+                name={"termsAndConditions"}
+                id={"termsAndConditions"}
+                error={errors.termsAndConditions}
+              />
+
+              <Button
+                label="Ver terminos y condiciones"
+                variant="info"
+                type="button"
+                size="small"
+                icon={<FaFile />}
+                onClick={openTermsAndCoditionModal}
+              />
+            </div>
+            <TermsAndCoditionDialog
+              idScenario={scenario.id}
+              isOpen={isOpenTermsAndCoditionModal}
+              onClose={closeTermsAndCoditionModal}
             />
           </div>
           <div className="flex gap-2 justify-end mt-5">
