@@ -1,34 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useNotification } from "../context/NotificationContext";
 import Button from "../../../components/ui/Button/Button";
-import { getScenarioById } from "../services/apiServices/ScenarioApi";
-import { useEffect } from "react";
 import carouselItems from "../models/CarouselItems";
 import { PLACES_DATA } from "../services/apiServices/PlacesData";
 import Label from "../../../components/ui/label/Label";
 import Breadcrum from "../../../components/ui/breadcrums/Breadcrum";
 import useBreadcrums from "../hooks/useBreadcrums";
-import {
-  FaCar,
-  FaMedkit,
-  FaRuler,
-  FaStar,
-  FaToilet,
-  FaUserFriends,
-  FaWifi,
-} from "react-icons/fa";
+import { FaRuler, FaUserFriends } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
 import Carousel from "../components/ui/slider/carousel/Carousel";
 import Tabs from "../../../components/ui/tabs/Tabs";
-import { FaDisplay, FaSliders } from "react-icons/fa6";
-import { MdAir } from "react-icons/md";
+import GeneralTabContent from "../components/layout/ScenarioViewTabsContent/GeneralTabContent";
+import TechnicalInfoTabContent from "../components/layout/ScenarioViewTabsContent/TechnicalInfoTabContent";
+import Separator from "../../../components/ui/separator/Separator";
+import imgPlaceholder from "../../../assets/placeholder.svg";
+import Modal from "../../../components/ui/Modal/Modal";
+import useModal from "../hooks/useModal";
+import Input from "../../../components/ui/form/input/Input";
+import RequesRentalForm from "../components/layout/Forms/RequesRentalForm";
+/* import useForm from "../hooks/useForm";
+import useUserStore from "../../../store/user"; */
 
 const ScenarioView = () => {
   const { idScenario } = useParams();
-  const { showNotification } = useNotification();
+  const { closeModal, isOpen, openModal } = useModal();
 
-  // simular una llamada a una API
   const scenario = PLACES_DATA.find(
     (place) => place.id === parseInt(idScenario)
   );
@@ -37,10 +33,16 @@ const ScenarioView = () => {
     window.location.pathname,
     scenario.title
   );
-  const NOT_LOCATION_PLACEHOLDER = "No location";
-  const handleReserve = () => {
-    showNotification("Reservar", "success");
-  };
+
+  useEffect(() => {
+    // scroll to top of the page when the component is mounted
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
+  // convertir el estado del escenario en un texto plano
   const statusScenario =
     scenario.status === "Disponible"
       ? "primary"
@@ -51,125 +53,15 @@ const ScenarioView = () => {
   const tabData = [
     {
       label: "General",
-      content: (
-        <div>
-          <p className="text-gray-700 font-semibold text-sm">
-            {scenario.description}
-          </p>
-          <div>
-            <h2 className="text-gray-700 font-bold text-lg my-2 border-b border-gray-300">
-              Caracteristicas Principales
-            </h2>
-            {scenario.features.map((feature) => (
-              <div>
-                <p className="flex gap-2 items-center text-gray-700 text-sm">
-                  {feature}
-                </p>
-                <br />
-              </div>
-            ))}
-            <div className="flex flex-col md:grid md:grid-cols-2 gap-2">
-              <p className="flex gap-2 items-center text-gray-700 text-sm">
-                <FaUserFriends />
-                <span className="font-semibold">Capacidad:</span>
-                {scenario.technicalData.capacity}
-              </p>
-              <p className="flex gap-2 items-center text-gray-700 text-sm">
-                <FaRuler />
-                <span className="font-semibold">Area:</span>
-                {scenario.area} m²
-              </p>
-              <p className="flex gap-2 items-center text-gray-700 text-sm">
-                <FaWifi />
-                <span className="font-semibold">Wifi:</span>
-                {scenario.services.wifi ? "Si" : "No"}
-              </p>
-              <p className="flex gap-2 items-center text-gray-700 text-sm">
-                <MdAir />
-                <span className="font-semibold">Aire acondicionado:</span>
-                {scenario.services.airConditioner ? "Si" : "No"}
-              </p>
-              <p className="flex gap-1 items-center text-gray-700 text-sm">
-                <FaToilet />
-                <span className="font-semibold">Baños: </span>
-                {scenario.services.bathrooms ? "Si" : "No"}
-              </p>
-            </div>
-          </div>
-        </div>
-      ),
+      content: <GeneralTabContent scenario={scenario} />,
     },
     {
       label: "Informacion tecnica",
-      content: (
-        <div>
-          <div>
-            <h2 className="text-gray-700 font-bold text-lg my-2 border-b border-gray-300">
-              Caracteristicas Tecnicas
-            </h2>
-          </div>
-          <div className="flex flex-col md:grid md:grid-cols-2 gap-2">
-            <p className="flex gap-2 items-center text-gray-700 text-sm">
-              <FaUserFriends />
-              <span className="font-semibold">Capacidad:</span>
-              {scenario.technicalData.capacity}
-            </p>
-            <p className="flex gap-2 items-center text-gray-700 text-sm">
-              <FaRuler />
-              <span className="font-semibold">Area:</span>
-              {scenario.area} m²
-            </p>
-            <p className="flex gap-2 items-center text-gray-700 text-sm">
-              <FaWifi />
-              <span className="font-semibold">Wifi:</span>
-              {scenario.services.wifi ? "Si" : "No"}
-            </p>
-            <p className="flex gap-2 items-center text-gray-700 text-sm">
-              <MdAir />
-              <span className="font-semibold">Aire acondicionado:</span>
-              {scenario.services.airConditioner ? "Si" : "No"}
-            </p>
-            <p className="flex gap-1 items-center text-gray-700 text-sm">
-              <FaSliders />
-              <span className="font-semibold">Sistema de sonido: </span>
-              {scenario.services.soundSystem ? "Si" : "No"}
-            </p>
-            <p className="flex gap-1 items-center text-gray-700 text-sm">
-              <FaDisplay />
-              <span className="font-semibold">Pantalla: </span>
-              {scenario.services.display ? "Si" : "No"}
-            </p>
-            <p className="flex gap-1 items-center text-gray-700 text-sm">
-              <FaStar />
-              <span className="font-semibold">Seguridad: </span>
-              {scenario.services.security ? "Si" : "No"}
-            </p>
-            <p className="flex gap-1 items-center text-gray-700 text-sm">
-              <FaMedkit />
-              <span className="font-semibold">Atencion Medica: </span>
-              {scenario.services.medicalAtention ? "Si" : "No"}
-            </p>
-            <p className="flex gap-1 items-center text-gray-700 text-sm">
-              <FaCar />
-              <span className="font-semibold">Parqueadero: </span>
-              {scenario.services.parking ? "Si" : "No"}
-            </p>
-            <p className="flex gap-1 items-center text-gray-700 text-sm">
-              <FaToilet />
-              <span className="font-semibold">Baños: </span>
-              {scenario.services.bathrooms ? "Si" : "No"}
-            </p>
-          </div>
-        </div>
-      ),
+      content: <TechnicalInfoTabContent scenario={scenario} />,
     },
     {
       label: "Galeria",
-      content: (
-        <div>
-          <Carousel items={carouselItems} />
-        </div>
-      ),
+      content: <Carousel items={carouselItems} />,
     },
   ];
 
@@ -186,26 +78,32 @@ const ScenarioView = () => {
           <h1 className="text-2xl text-gray-700 font-bold">{scenario.name}</h1>
           <p className="text-xl text-gray-700 font-light flex gap-1 items-center justify-start">
             <CiLocationOn />
-            {scenario.location ? scenario.location : NOT_LOCATION_PLACEHOLDER}
+            {scenario.location ? scenario.location : "Sin ubicacion"}
           </p>
         </div>
         <div className="w-full my-3 md:m-0 md:w-auto">
           <Button
             label={"Crear solicitud de reserva"}
-            onClick={handleReserve}
-            type="primary"
+            onClick={openModal}
+            variant="primary"
+          />
+          <RequesRentalForm
+            closeModal={closeModal}
+            isOpen={isOpen}
+            scenario={scenario}
+            title={"Generar solicitud"}
           />
         </div>
       </div>
-      <div className="flex-col p-3 gap-1 md:gap-3 md:flex md:flex-row sm:flex">
-        <div className="flex-1 border border-gray-300 rounded-lg sm:flex-1/3 lg:flex-1">
+      <div className="flex flex-col p-3 gap-1 md:gap-3 md:flex-row">
+        <div className="flex-1 border border-gray-300 rounded-lg md:flex-1/3">
           <div className="w-full flex-col gap-2 p-5">
             <div>
               {/* <Carousel items={scenario.carouselItems} /> */}
               <picture>
                 <img
-                  src="/public/placeholder.svg"
-                  alt=""
+                  src={imgPlaceholder}
+                  alt="placeholder"
                   className="w-full max-h-[300px] md:max-h-[500px] h-auto object-cover rounded-lg"
                 />
               </picture>
@@ -225,10 +123,85 @@ const ScenarioView = () => {
             </div>
             <div className="w-full p-2">
               <Tabs tabs={tabData} />
+              {/**
+               * El componente de tabs hay que mejorarlo para que se vea mejor
+               * seria tedioso contruir componentes separados para para cada tab y pasarlos como prop en los arrays
+               * no debe pasarse un array, sino nomas contruir el componente
+               **/}
             </div>
           </div>
         </div>
-        <div className="flex-1 border border-gray-300 rounded-lg"> asdsd </div>
+        <div className="flex-1 ">
+          <div className="p-3 border border-gray-300 rounded-lg">
+            <h3 className="text-gray-800 font-bold text-2xl p-2">
+              Tarifas de Alquiler
+            </h3>
+            <p className="text-gray-500 font-light text-sm p-2 md:text-lg">
+              Infomarcion actual sobre tarifas de alquiler y disponibilidad
+            </p>
+            <div>
+              <div className="w-full flex gap-2 items-center justify-between p-2">
+                <p className="font-semibold text-sm md:text-lg text-gray-600">
+                  Tarifa por hora (1h):
+                </p>
+                <span className="font-bold text-gray-800 text-lg">
+                  ${scenario.rates.pricePerHour}
+                </span>
+              </div>
+              <div className="w-full flex gap-2 items-center justify-between p-2">
+                <p className="font-semibold text-sm md:text-lg text-gray-600">
+                  Tarifa por mitad de dia: (5h):
+                </p>
+                <span className="font-bold text-gray-800 text-lg">
+                  ${scenario.rates.halfDayPrice}
+                </span>
+              </div>
+              <div className="w-full flex gap-2 items-center justify-between p-2">
+                <p className="font-semibold text-sm md:text-lg text-gray-600">
+                  Tarifa por dia: (8h):
+                </p>
+                <span className="font-bold text-gray-800 text-lg">
+                  ${scenario.rates.fullDayPrice}
+                </span>
+              </div>
+              <div className="w-full flex gap-2 items-center justify-between p-2">
+                <p className="font-semibold text-sm md:text-lg text-gray-600">
+                  Tarifa por fin de semana:
+                </p>
+                <span className="font-bold text-gray-800 text-lg">
+                  {scenario.rates.weekendDaySurchargePercent}%
+                </span>
+              </div>
+            </div>
+            <Separator />
+            <div>
+              <div>
+                <h3 className="text-lg font-bold text-gray-800 md:text-xl p-2">
+                  Servicios adicionales
+                </h3>
+                {scenario.additionalServices.map((service) => (
+                  <div className="flex gap-2 items-center justify-between p-2">
+                    <p className="font-semibold text-sm md:text-lg text-gray-800">
+                      {service.serviceName}:
+                    </p>
+                    <span className="font-bold text-gray-600">
+                      {service.available ? "Disponible" : "No disponible"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="border border-gray-300 p-5 rounded-lg m-4">
+        <h2 className="text-lg font-bold text-gray-800 md:text-xl">
+          Cronograma de reservas
+        </h2>
+        <p className="text-gray-500 font-light text-sm p-2 md:text-lg">
+          Infomarcion actual sobre tarifas de alquiler y disponibilidad
+        </p>
+        <div></div>
       </div>
     </div>
   );

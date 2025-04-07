@@ -10,12 +10,17 @@ import { FaX } from "react-icons/fa6";
 import { PLACES_DATA } from "../services/apiServices/PlacesData";
 import ContactUs from "../components/layout/ContactUs";
 import useRedirection from "../hooks/useRedirection";
+import Breadcrum from "../../../components/ui/breadcrums/Breadcrum";
+import useBreadcrums from "../hooks/useBreadcrums";
 
 const UleamView = () => {
   const { redirectToWithId } = useRedirection();
-
+  const { arrayOfUriPath } = useBreadcrums(window.location.pathname);
   return (
     <div className="w-auto h-auto p-2 flex flex-col items-center justify-start sm:justify-center sm:flex-col">
+      <div className="flex gap-1 my-2 bg-white border-b border-gray-200 p-5 w-full">
+        <Breadcrum arrayOfUriPath={arrayOfUriPath} />
+      </div>
       <div className="bg-gray-600 p-[40px] rounded-2xl border-white border mt-5 md:mt-0 md:w-auto">
         <div className="flex flex-col items-center justify-center gap-3">
           <h1 className="text-white font-bold text-center text-xl sm:text-4xl">
@@ -24,7 +29,16 @@ const UleamView = () => {
           <p className="font-light text-white my-2 sm:my-[50px] text-2xl text-center">
             Conoce más aquí
           </p>
-          <iframe
+          <video
+            src="/public/PROMO ULEAM.mp4"
+            controls
+            className="w-full h-[450px] rounded-2xl mt-5"
+            autoPlay
+            muted
+          >
+            <source src="/public/PROMO ULEAM.mp4" type="video/mp4" />
+          </video>
+          {/*           <iframe
             src="https://www.youtube.com/embed/0qn5Hajrd5c?si=zduYCnzqm6ft2EIk"
             title="YouTube video player"
             frameborder="0"
@@ -32,7 +46,7 @@ const UleamView = () => {
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen
             className="w-full h-[450px] rounded-2xl mt-5"
-          ></iframe>
+          ></iframe> */}
         </div>
       </div>
 
@@ -80,8 +94,7 @@ const UleamView = () => {
                 <Button
                   label={"Mas informacion"}
                   onClick={() => redirectToWithId("/uleam", place.id)}
-                  type="primary"
-                  icon={<FaCheck />}
+                  variant="primary"
                 />
               </CardFotter>
             </Card>
@@ -104,7 +117,7 @@ const UleamView = () => {
                 <Button
                   label={"Mas informacion"}
                   onClick={() => alert("button clicked")}
-                  type="primary"
+                  variant="primary"
                 />
               </div>
             </div>

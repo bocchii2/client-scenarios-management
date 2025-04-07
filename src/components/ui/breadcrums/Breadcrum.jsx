@@ -15,8 +15,12 @@ const Breadcrum = ({ arrayOfUriPath, currentLocationLabel }) => {
                 : "text-gray-600 font-light"
             } cursor-pointer select-none px-2 `}
           >
-            {index == arrayOfUriPath.length - 1
-              ? currentLocationLabel.toUpperCase()
+            {currentLocationLabel
+              ? index == arrayOfUriPath.length - 1
+                ? currentLocationLabel.toUpperCase()
+                : p.toUpperCase()
+              : index == 0
+              ? p.toUpperCase()
               : p.toUpperCase()}
           </Link>
           <span className="select-none text-blue-600"> / </span>
