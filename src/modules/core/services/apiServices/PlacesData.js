@@ -66,6 +66,16 @@ export const PLACES_DATA = [
         available: true,
       },
     ],
+    // Terms and conditions
+    termsAndConditions: [
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+      "Si no estás de acuerdo con estos términos, por favor no utilices el servicio.",
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+    ],
   },
   {
     id: 2,
@@ -138,6 +148,16 @@ export const PLACES_DATA = [
         available: true,
       },
     ],
+    // Terms and conditions
+    termsAndConditions: [
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+      "Si no estás de acuerdo con estos términos, por favor no utilices el servicio.",
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+    ],
   },
   {
     id: 3,
@@ -203,6 +223,16 @@ export const PLACES_DATA = [
         serviceName: "Publicidad",
         available: true,
       },
+    ],
+    // Terms and conditions
+    termsAndConditions: [
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+      "Si no estás de acuerdo con estos términos, por favor no utilices el servicio.",
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
     ],
   },
   {
@@ -274,6 +304,16 @@ export const PLACES_DATA = [
         available: true,
       },
     ],
+    // Terms and conditions
+    termsAndConditions: [
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+      "Si no estás de acuerdo con estos términos, por favor no utilices el servicio.",
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+    ],
   },
   {
     id: 5,
@@ -340,6 +380,16 @@ export const PLACES_DATA = [
         available: true,
       },
     ],
+    // Terms and conditions
+    termsAndConditions: [
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+      "Si no estás de acuerdo con estos términos, por favor no utilices el servicio.",
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+    ],
   },
   {
     id: 6,
@@ -403,6 +453,16 @@ export const PLACES_DATA = [
         serviceName: "Publicidad",
         available: true,
       },
+    ],
+    // Terms and conditions
+    termsAndConditions: [
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+      "Si no estás de acuerdo con estos términos, por favor no utilices el servicio.",
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
     ],
   },
   {
@@ -473,6 +533,16 @@ export const PLACES_DATA = [
         available: true,
       },
     ],
+    // Terms and conditions
+    termsAndConditions: [
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+      "Si no estás de acuerdo con estos términos, por favor no utilices el servicio.",
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+    ],
   },
   {
     id: 8,
@@ -536,6 +606,16 @@ export const PLACES_DATA = [
         serviceName: "Publicidad",
         available: true,
       },
+    ],
+    // Terms and conditions
+    termsAndConditions: [
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+      "Si no estás de acuerdo con estos términos, por favor no utilices el servicio.",
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
     ],
   },
   {
@@ -601,6 +681,16 @@ export const PLACES_DATA = [
         serviceName: "Publicidad",
         available: true,
       },
+    ],
+    // Terms and conditions
+    termsAndConditions: [
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
+      "Si no estás de acuerdo con estos términos, por favor no utilices el servicio.",
+      "El usuario es responsable de la información proporcionada.",
+      "Nos reservamos el derecho de modificar estos términos en cualquier momento.",
+      "El servicio es gratuito y está destinado únicamente para uso personal.",
     ],
   },
 ];
