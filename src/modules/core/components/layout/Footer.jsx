@@ -24,13 +24,16 @@ const Footer = () => {
               </Link>
 
               <Link
-                to="/servicios"
+                to="/uleam/servicios"
                 className="py-2 px-3 bg-transparent text-white hover:underline hover:text-white cursor-pointer transition-all duration-100"
               >
                 Servicios
               </Link>
 
-              <Link className="py-2 px-3 bg-transparent text-white hover:underline hover:text-white cursor-pointer transition-all duration-100">
+              <Link
+                to={"/uleam/cotizaciones"}
+                className="py-2 px-3 bg-transparent text-white hover:underline hover:text-white cursor-pointer transition-all duration-100"
+              >
                 Cotizaciones
               </Link>
             </div>

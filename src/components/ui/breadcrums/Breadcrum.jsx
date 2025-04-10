@@ -8,7 +8,7 @@ const Breadcrum = ({ arrayOfUriPath, currentLocationLabel }) => {
         <div key={index} className="inline-block">
           <Link
             key={p}
-            to={`/${p}`}
+            to={index == 0 ? "/" : `/${p}`}
             className={`${
               index == arrayOfUriPath.length - 1
                 ? "text-blue-600 font-semibold"

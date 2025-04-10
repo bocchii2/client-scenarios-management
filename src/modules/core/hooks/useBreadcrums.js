@@ -6,7 +6,7 @@ const useBreadcrums = (currentLocation, contextObject) => {
   arrayOfUriPath.splice(0, 1, "inicio"); // replace the first element of the array, 0 to 1, with "inicio"
 
   if (contextObject) {
-    currentLocationLabel = contextObject.replace(".", " ");
+    currentLocationLabel = contextObject;
     return { arrayOfUriPath, currentLocationLabel };
   }
   return { arrayOfUriPath };

@@ -1,11 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import Header from "../core/components/layout/Header";
+import Footer from "../core/components/layout/Footer";
 
 const AuthLayout = () => {
   return (
     <div>
-      <h1>Auth Layout</h1>
+      <Header />
       <Outlet />
+      <Footer />
     </div>
   );
 };

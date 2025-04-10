@@ -18,7 +18,7 @@ const Button = ({
       disabled={disabled}
       type={type}
       className={`
-      w-auto py-2 px-4 rounded-md text-white  flex items-center justify-center gap-2
+      w-full py-2 px-4 rounded-md text-white  flex items-center justify-center gap-2
       ${loading && "cursor-default bg-gray-400 text-white hover:bg-gray-400"}
       ${disabled && "cursor-default opacity-50"}
       ${size === "small" && "text-sm"}

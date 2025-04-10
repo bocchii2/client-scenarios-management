@@ -9,7 +9,7 @@ const useUserStore = create((set, get) => ({
     phone: "123456789",
     address: "123 Main St",
     role: "admin",
-    loggedIn: true,
+    loggedIn: false,
   },
   sayHello: (name) => console.log(`Hello, ${name}!`),
   setUser: (user) => set((state) => ({ user: { ...state.user, ...user } })),

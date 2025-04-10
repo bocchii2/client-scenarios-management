@@ -10,8 +10,11 @@ import { NotificationProvider } from "./providers/NotificationProvider";
 import LoginView from "./modules/auth/pages/LoginView";
 import RegisterView from "./modules/auth/pages/RegisterView";
 import AuthLayout from "./modules/auth/AuthLayout";
-
 const App = () => {
+  /*   // Lazy load the components
+  const AuthLayout = lazy(() => import("./modules/auth/AuthLayout"));
+  const CoreLayout = lazy(() => import("./modules/core/CoreLayout"));
+ */
   return (
     <BrowserRouter>
       <NotificationProvider>

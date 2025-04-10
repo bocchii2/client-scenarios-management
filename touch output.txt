@@ -1,0 +1,13 @@
+[2025-04-07 15:35:32] Iniciando frontend con npm run dev...
+[2025-04-07 15:35:32] Script finalizado.
+
+> cliente-gestion-escenarios@0.0.0 dev
+> vite
+
+[32m✔[0m [33mConsole Ninja[0m extension is connected to [33mVite[0m, see [36mhttps://tinyurl.com/2vt8jxzw[0m
+3:35:44 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+
+  VITE v6.2.2  ready in 3385 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose

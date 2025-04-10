@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Button from "../../../components/ui/Button/Button";
 import carouselItems from "../models/CarouselItems";
@@ -19,6 +19,7 @@ import RequesRentalForm from "../components/layout/Forms/RequesRentalForm";
 import { useEffect } from "react";
 import useUserStore from "../../../store/user";
 import NoLoginDialog from "../components/ui/dialog/NoLoginDialog";
+// import scenarioApi from "../services/apiServices/ScenarioApi";
 
 const ScenarioView = () => {
   const { idScenario } = useParams();
@@ -27,16 +28,11 @@ const ScenarioView = () => {
     isOpen: isOpenRentalFormModal,
     openModal: openRentalFormModal,
   } = useModal();
+  // const [scenario, setScenario] = useState(null);
   const { loggedIn } = useUserStore((state) => state.user);
 
-  // cambiar esto por el estado global
   const scenario = PLACES_DATA.find(
     (place) => place.id === parseInt(idScenario)
-  );
-
-  const { arrayOfUriPath, currentLocationLabel } = useBreadcrums(
-    window.location.pathname,
-    scenario.title
   );
 
   useEffect(() => {
@@ -45,7 +41,23 @@ const ScenarioView = () => {
       top: 0,
       behavior: "smooth",
     });
+    // Fetch the scenario data from the API
+    // This is a placeholder, replace with your actual API call
+    /*const fetchScenario = async () => {
+      try {
+        const response = await scenarioApi.getScenarioById(idScenario);
+        setScenario(response.data);
+      } catch (error) {
+        console.error("Error fetching scenario:", error);
+      }
+    };
+    fetchScenario(); */
   }, []);
+
+  const { arrayOfUriPath, currentLocationLabel } = useBreadcrums(
+    window.location.pathname,
+    scenario.title
+  );
 
   // convertir el estado del escenario en un texto plano
   const statusScenario =
@@ -213,7 +225,11 @@ const ScenarioView = () => {
         <p className="text-gray-500 font-light text-sm p-2 md:text-lg">
           Infomarcion actual sobre tarifas de alquiler y disponibilidad
         </p>
-        <div></div>
+        <div className="w-auto h-auto flex gap-2 items-center justify-between p-2">
+          <div className="w-full bg-gray-200 rounded-lg p-4 flex items-center justify-center">
+            adas
+          </div>
+        </div>
       </div>
     </div>
   );
