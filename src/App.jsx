@@ -10,6 +10,9 @@ import { NotificationProvider } from "./providers/NotificationProvider";
 import LoginView from "./modules/auth/pages/LoginView";
 import RegisterView from "./modules/auth/pages/RegisterView";
 import AuthLayout from "./modules/auth/AuthLayout";
+import AdminOverviewView from "./modules/admin/pages/AdminOverviewView";
+import AdminLayout from "./modules/admin/AdminLayout";
+
 const App = () => {
   /*   // Lazy load the components
   const AuthLayout = lazy(() => import("./modules/auth/AuthLayout"));
@@ -24,6 +27,9 @@ const App = () => {
             <Route path="login" element={<LoginView />} />
             <Route path="register" element={<RegisterView />} />
           </Route>
+          <Route path="admin" element={<AdminLayout />}>
+            <Route path="overview" element={<AdminOverviewView />} />
+          </Route>
           <Route element={<CoreLayout />}>
             <Route path="" element={<HomeView />} />
             <Route path="/uleam">
@@ -31,6 +37,21 @@ const App = () => {
               <Route path=":idScenario" element={<ScenarioView />} />
               <Route path="cotizaciones" element={<CotizacionesView />} />
               <Route path="servicios" element={<ServiciosView />} />
+              <Route path="user">
+                <Route path="profile" element={<div>Profile</div>} />
+                <Route path="settings" element={<div>Settings</div>} />
+                <Route path="my-requests" element={<div>My Requests</div>}>
+                  <Route
+                    path=":idRequest"
+                    element={<div>Request Detail</div>}
+                  />
+                  <Route
+                    path=":idRequest/overview"
+                    element={<div>overview request</div>}
+                  />
+                </Route>
+                <Route path="invitations" element={<div>invitations</div>} />
+              </Route>
             </Route>
           </Route>
         </Routes>

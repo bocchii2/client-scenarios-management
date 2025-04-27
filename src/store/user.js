@@ -3,15 +3,15 @@ import { create } from "zustand";
 const useUserStore = create((set, get) => ({
   user: {
     id: 1,
-    name: "John Doe",
+    name: "Ellen Doe",
     lastname: "Doe",
     email: "johndoe@email.com",
     phone: "123456789",
     address: "123 Main St",
-    role: "admin",
+    role: "student",
+    imgUrl: "/public/my_avatar.jpeg",
     loggedIn: false,
   },
-  sayHello: (name) => console.log(`Hello, ${name}!`),
   setUser: (user) => set((state) => ({ user: { ...state.user, ...user } })),
   setName: (name) => set((state) => ({ user: { ...state.user, name } })),
   clearUser: () => set({ user: null }),
@@ -20,13 +20,6 @@ const useUserStore = create((set, get) => ({
   updateUser: (newUser) =>
     set((state) => ({ user: { ...state.user, ...newUser } })),
   resetUser: () => set({ user: null }),
-  services: [],
-  addService: (service) =>
-    set((state) => ({ services: [...state.services, service] })),
-  removeService: (serviceId) =>
-    set((state) => ({
-      services: state.services.filter((service) => service.id !== serviceId),
-    })),
 }));
 
 export default useUserStore;

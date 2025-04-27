@@ -18,25 +18,25 @@ const Button = ({
       disabled={disabled}
       type={type}
       className={`
-      w-full py-2 px-4 rounded-md text-white  flex items-center justify-center gap-2
+      w-full py-2 px-4 rounded-md flex items-center justify-center gap-2
       ${loading && "cursor-default bg-gray-400 text-white hover:bg-gray-400"}
-      ${disabled && "cursor-default opacity-50"}
-      ${size === "small" && "text-sm"}
+      ${disabled && "cursor-default opacity-50 text-white "}
+      ${size === "small" && "text-sm "}
       ${size === "medium" && "text-base"}
       ${size === "large" && "text-lg"}
       ${size === "xlarge" && "text-xl"}
-      ${variant === "link" && "bg-transparent text-blue-500 hover:underline"}
-      ${variant === "primary" && "bg-[#1069A5] hover:bg-[#37566b]"}
-      ${variant === "secondary" && "bg-gray-500 hover:bg-gray-600"}
-      ${variant === "success" && "bg-green-500 hover:bg-green-600"}
-      ${variant === "danger" && "bg-red-500 hover:bg-red-600"}
+      ${variant === "link" && " bg-transparent text-blue-500 hover:underline"}
+      ${variant === "primary" && "text-white bg-[#1069A5] hover:bg-[#37566b]"}
+      ${variant === "secondary" && "text-white bg-gray-500 hover:bg-gray-600"}
+      ${variant === "success" && "text-white  bg-green-500 hover:bg-green-600"}
+      ${variant === "danger" && "text-white  bg-red-500 hover:bg-red-600"}
       ${
         variant === "warning" &&
-        "bg-yellow-500 text-yellow-800 hover:bg-yellow-600"
+        "  bg-yellow-500 text-yellow-800 hover:bg-yellow-600"
       }
       ${
         variant === "info" &&
-        "bg-indigo-500 text-indigo-800 hover:bg-indigo-600"
+        "  bg-indigo-500 text-indigo-800 hover:bg-indigo-600"
       }
       ${disabled && "cursor-default opacity-50"}
       cursor-pointer 
