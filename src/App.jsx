@@ -29,6 +29,10 @@ const App = () => {
           </Route>
           <Route path="admin" element={<AdminLayout />}>
             <Route path="overview" element={<AdminOverviewView />} />
+            <Route path="places" element={<div>Places</div>} />
+            <Route path="users" element={<div>Users</div>} />
+            <Route path="requests" element={<div>Requests</div>} />
+            <Route path="settings" element={<div>Settings</div>} />
           </Route>
           <Route element={<CoreLayout />}>
             <Route path="" element={<HomeView />} />

@@ -1,14 +1,14 @@
 import React from "react";
 import Button from "../../../components/ui/Button/Button";
-
 import { Link } from "react-router-dom";
 import Logo from "../../../components/ui/Logo/Logo";
 import { FaMicrosoft } from "react-icons/fa6";
 import LoginForm from "../components/layout/forms/loginForm/LoginForm";
+
 const LoginView = () => {
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-center p-6">
-      <Logo />
+      <Logo color="gray-500" />
       <div className="w-full md:w-[70%] lg:w-1/2 p-5 rounded-lg border border-gray-400 transition-all duration-100">
         <h1 className="text-2xl text-gray-800 font-bold text-center">
           Iniciar Sesion
@@ -40,7 +40,6 @@ const LoginView = () => {
             </span>
           </div>
         </div>
-
         <div>
           <Button
             label={"Iniciar Sesión con Office365"}

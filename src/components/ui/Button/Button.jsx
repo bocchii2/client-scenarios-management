@@ -25,7 +25,7 @@ const Button = ({
       ${size === "medium" && "text-base"}
       ${size === "large" && "text-lg"}
       ${size === "xlarge" && "text-xl"}
-      ${variant === "link" && " bg-transparent text-blue-500 hover:underline"}
+      ${variant === "link" && " bg-transparent text-inherit hover:underline"}
       ${variant === "primary" && "text-white bg-[#1069A5] hover:bg-[#37566b]"}
       ${variant === "secondary" && "text-white bg-gray-500 hover:bg-gray-600"}
       ${variant === "success" && "text-white  bg-green-500 hover:bg-green-600"}

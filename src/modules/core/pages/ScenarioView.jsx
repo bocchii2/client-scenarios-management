@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useMemo } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import Button from "../../../components/ui/Button/Button";
 import carouselItems from "../models/CarouselItems";
 import { PLACES_DATA } from "../services/apiServices/PlacesData";
@@ -17,23 +17,30 @@ import imgPlaceholder from "../../../assets/placeholder.svg";
 import useModal from "../hooks/useModal";
 import RequesRentalForm from "../components/layout/Forms/RequesRentalForm";
 import { useEffect } from "react";
-import useUserStore from "../../../store/user";
 import NoLoginDialog from "../components/ui/dialog/NoLoginDialog";
+import { useCombinedStore } from "../../../store/userInstituteBounded";
 // import scenarioApi from "../services/apiServices/ScenarioApi";
 
 const ScenarioView = () => {
   const { idScenario } = useParams();
+  const location = useLocation();
+
   const {
     closeModal: closeRentalFormModal,
     isOpen: isOpenRentalFormModal,
     openModal: openRentalFormModal,
   } = useModal();
   // const [scenario, setScenario] = useState(null);
-  const { loggedIn } = useUserStore((state) => state.user);
+  const user = useCombinedStore((state) => state.user) || {};
 
   const scenario = PLACES_DATA.find(
     (place) => place.id === parseInt(idScenario)
   );
+
+  // Early return if scenario is not found
+  if (!scenario) {
+    return <div>Scenario not found</div>;
+  }
 
   useEffect(() => {
     // scroll to top of the page when the component is mounted
@@ -52,35 +59,41 @@ const ScenarioView = () => {
       }
     };
     fetchScenario(); */
-  }, []);
+  }, [idScenario]);
 
-  const { arrayOfUriPath, currentLocationLabel } = useBreadcrums(
-    window.location.pathname,
-    scenario.title
+  const { arrayOfUriPath, currentLocationLabel } = useMemo(
+    () => useBreadcrums(location.pathname, scenario?.title),
+    [location.pathname, scenario?.title]
   );
 
   // convertir el estado del escenario en un texto plano
-  const statusScenario =
-    scenario.status === "Disponible"
-      ? "primary"
-      : scenario.status === "En mantenimiento"
-      ? "warning"
-      : "danger";
+  const statusScenario = useMemo(
+    () =>
+      scenario.status === "Disponible"
+        ? "primary"
+        : scenario.status === "En mantenimiento"
+        ? "warning"
+        : "danger",
+    [scenario.status]
+  );
 
-  const tabData = [
-    {
-      label: "General",
-      content: <GeneralTabContent scenario={scenario} />,
-    },
-    {
-      label: "Informacion tecnica",
-      content: <TechnicalInfoTabContent scenario={scenario} />,
-    },
-    {
-      label: "Galeria",
-      content: <Carousel items={carouselItems} />,
-    },
-  ];
+  const tabData = useMemo(
+    () => [
+      {
+        label: "General",
+        content: <GeneralTabContent scenario={scenario} />,
+      },
+      {
+        label: "Informacion tecnica",
+        content: <TechnicalInfoTabContent scenario={scenario} />,
+      },
+      {
+        label: "Galeria",
+        content: <Carousel items={carouselItems} />,
+      },
+    ],
+    [scenario]
+  );
 
   return (
     <div>
@@ -104,7 +117,7 @@ const ScenarioView = () => {
             onClick={openRentalFormModal}
             variant="primary"
           />
-          {loggedIn ? (
+          {user.loggedIn ? (
             <RequesRentalForm
               closeModal={closeRentalFormModal}
               isOpen={isOpenRentalFormModal}
@@ -114,7 +127,7 @@ const ScenarioView = () => {
           ) : (
             <NoLoginDialog
               isOpen={isOpenRentalFormModal}
-              closeModal={closeRentalFormModal}
+              onClose={closeRentalFormModal}
             />
           )}
         </div>

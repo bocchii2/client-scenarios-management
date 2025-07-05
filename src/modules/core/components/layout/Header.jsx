@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useUserStore from "../../../../store/user";
-import ProfileUser from "./profile/ProfileUser";
+import ProfileUser from "./profile/ProfileUserCard";
 import Button from "../../../../components/ui/Button/Button";
 import { FaX } from "react-icons/fa6";
 import { FaBars } from "react-icons/fa";
+import { useCombinedStore } from "../../../../store/userInstituteBounded";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { loggedIn } = useUserStore((state) => state.user);
+  const user = useCombinedStore((state) => state.user);
+
+  const handleProfileClick = () => {
+    if (user.role === "admin") {
+      navigate("/admin/overview");
+    } else {
+      navigate("/user/profile");
+    }
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogin = () => navigate("/auth/login");
@@ -16,9 +24,12 @@ const Header = () => {
 
   return (
     <header className="w-full bg-[rgb(16,105,165)] text-white shadow-md">
-      <div className="flex flex-col items-center px-4 pt-5">
-        <h1 className="text-2xl md:text-3xl font-bold">Manta Convenciones</h1>
-        <p className="text-sm font-light">El mejor lugar para tus eventos</p>
+      <div className="flex items-center justify-between px-4 pt-5">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold">Manta Convenciones</h1>
+          <p className="text-sm font-light">El mejor lugar para tus eventos</p>
+        </div>
+        {user.loggedIn && <ProfileUser onClick={handleProfileClick} />}
       </div>
 
       <div className="flex items-center justify-between px-4 py-3 md:px-7 md:py-4">
@@ -57,9 +68,7 @@ const Header = () => {
 
         {/* Botones Login/Perfil Desktop */}
         <div className="hidden md:flex gap-2 items-center">
-          {loggedIn ? (
-            <ProfileUser />
-          ) : (
+          {!user.loggedIn && (
             <>
               <Button
                 variant="link"
@@ -115,7 +124,8 @@ const Header = () => {
             Cotizaciones
           </Link>
 
-          {loggedIn ? (
+          {/* Botones Login/Perfil Mobil */}
+          {user.loggedIn ? (
             <ProfileUser />
           ) : (
             <>

@@ -1,10 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import LateralMenu from "./components/layout/lateralNavBar/LateralNavBar";
 const AdminLayout = () => {
   return (
-    <div>
-      <h1>Admin Layout</h1>
-      <p>This is the admin layout.</p>
+    <div className="flex">
+      <LateralMenu />
       <Outlet />
       {/* Add your admin-specific components here */}
       {/* For example, a sidebar or admin navigation */}

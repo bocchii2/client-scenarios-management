@@ -6,9 +6,11 @@ import Button from "../../../../../../components/ui/Button/Button";
 import { login } from "../../../../services/auth/authService";
 import { showToastError } from "../../../../../../components/ui/Toast/Toast";
 import useRedirection from "../../../../../core/hooks/useRedirection";
+import { useCombinedStore } from "../../../../../../store/userInstituteBounded";
 
 const LoginForm = () => {
   const { redirectTo } = useRedirection();
+  const { setUser } = useCombinedStore();
   const [generalError, setGeneralError] = useState("");
   const requiredFields = ["email", "password"];
   const {
@@ -49,9 +51,13 @@ const LoginForm = () => {
       // 5. Todo bien, enviar formulario usando loginService
       const response = await login(formData.email, formData.password);
       if (response.success) {
-        // 6. Si la respuesta es exitosa, redirigir al usuario
+        // 6. Si la respuesta es exitosa, actualizar el estado y redirigir
         console.log("Inicio de sesión exitoso:", response);
-        // Aquí puedes redirigir al usuario a otra página
+
+        // Asegurar que el usuario esté actualizado en el store
+        setUser(response.user);
+
+        // Redirigir según el rol del usuario
         if (response.userRole === "admin") {
           redirectTo("/admin/overview");
         } else {

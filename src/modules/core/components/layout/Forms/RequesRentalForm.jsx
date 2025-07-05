@@ -1,6 +1,5 @@
 import React from "react";
 import useForm from "../../../hooks/useForm";
-import useUserStore from "../../../../../store/user";
 import Input from "../../../../../components/ui/form/input/Input";
 import Button from "../../../../../components/ui/Button/Button";
 import Modal from "../../../../../components/ui/Modal/Modal";
@@ -10,6 +9,7 @@ import { Link } from "react-router-dom";
 import { FaCalendar, FaFile } from "react-icons/fa6";
 import TermsAndCoditionDialog from "./TermsAndCoditionDialog";
 import useModal from "../../../hooks/useModal";
+import { useCombinedStore } from "../../../../../store/userInstituteBounded";
 
 const RequesRentalForm = ({ isOpen, closeModal, title, scenario }) => {
   const DISABLED_STUDENT_AND_PLACE_DATA = true; // cambiar a true para deshabilitar los inputs
@@ -19,7 +19,7 @@ const RequesRentalForm = ({ isOpen, closeModal, title, scenario }) => {
     openModal: openTermsAndCoditionModal,
   } = useModal();
   // usar el servicio para consular el lugar por id
-  const user = useUserStore((state) => state.user);
+  const user = useCombinedStore((state) => state.user);
   const { formData, errors, handleChange, handleSubmit, loading, cleanErrors } =
     useForm(
       {
