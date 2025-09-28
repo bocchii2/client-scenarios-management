@@ -13,6 +13,12 @@ const LoginForm = () => {
   const { setUser } = useCombinedStore();
   const [generalError, setGeneralError] = useState("");
   const requiredFields = ["email", "password"];
+  let initialFormState = {
+    email: "",
+    password: "",
+    rememberMe: false,
+  };
+
   const {
     formData,
     errors,
@@ -21,12 +27,7 @@ const LoginForm = () => {
     loading,
     validateRequiredFields,
     setLoading,
-  } = useForm(
-    {
-      email: "",
-      password: "",
-      rememberMe: false,
-    },
+  } = useForm(initialFormState,
     false,
     requiredFields
   );

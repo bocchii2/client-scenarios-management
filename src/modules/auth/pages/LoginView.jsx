@@ -14,8 +14,7 @@ const LoginView = () => {
           Iniciar Sesion
         </h1>
         <p className="text-sm text-gray-600 text-center mb-5">
-          Bienvenido a la plataforma de reservas de escenarios ULEAM. Por favor
-          inicia sesión para continuar.
+          Bienvenido a la plataforma de reservas de escenarios. Por favor inicia sesión para continuar.
         </p>
         <LoginForm />
         <div className="text-center my-5">
@@ -45,6 +44,7 @@ const LoginView = () => {
             label={"Iniciar Sesión con Office365"}
             variant="secondary"
             size="medium"
+            disabled={true}
             type="button"
             icon={<FaMicrosoft size={20} className="text-white" />}
           />
