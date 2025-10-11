@@ -58,14 +58,7 @@ const Header = () => {
           >
             Servicios
           </Link>
-          <Link
-            to="/uleam/cotizaciones"
-            className="py-2 px-3 hover:bg-white hover:text-[rgb(16,105,165)] transition-all duration-100"
-          >
-            Cotizaciones
-          </Link>
         </nav>
-
         {/* Botones Login/Perfil Desktop */}
         <div className="hidden md:flex gap-2 items-center">
           {!user.loggedIn && (

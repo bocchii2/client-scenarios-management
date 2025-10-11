@@ -6,11 +6,11 @@ import Button from "../../../../../../components/ui/Button/Button";
 import { login } from "../../../../services/auth/authService";
 import { showToastError } from "../../../../../../components/ui/Toast/Toast";
 import useRedirection from "../../../../../core/hooks/useRedirection";
-import { useCombinedStore } from "../../../../../../store/userInstituteBounded";
+import useAuthGuard from "../../../../../../hooks/useAuthGuard";
 
 const LoginForm = () => {
   const { redirectTo } = useRedirection();
-  const { setUser } = useCombinedStore();
+  const { login: loginWithAuth } = useAuthGuard(); // ✅ Usar el hook de auth
   const [generalError, setGeneralError] = useState("");
   const requiredFields = ["email", "password"];
   let initialFormState = {
@@ -27,10 +27,7 @@ const LoginForm = () => {
     loading,
     validateRequiredFields,
     setLoading,
-  } = useForm(initialFormState,
-    false,
-    requiredFields
-  );
+  } = useForm(initialFormState, false, requiredFields);
 
   const customSubmit = async (e) => {
     e.preventDefault();
@@ -46,26 +43,31 @@ const LoginForm = () => {
 
       // 4. Si hay errores personalizados o de campos requeridos, detener
       if (!isValid) {
+        setLoading(false);
         return;
       }
 
       // 5. Todo bien, enviar formulario usando loginService
       const response = await login(formData.email, formData.password);
+
       if (response.success) {
-        // 6. Si la respuesta es exitosa, actualizar el estado y redirigir
+        // 6. ✅ Usar el hook para manejar login automáticamente
         console.log("Inicio de sesión exitoso:", response);
 
-        // Asegurar que el usuario esté actualizado en el store
-        setUser(response.user);
+        // El hook maneja automáticamente:
+        // - Actualización del estado en Zustand
+        // - Guardado en localStorage
+        // - Marcado como loggedIn: true
+        loginWithAuth(response.user);
 
-        // Redirigir según el rol del usuario
-        if (response.userRole === "admin") {
+        // 7. ✅ Redirigir según el rol del usuario
+        if (response.userRole === "admin" || response.user?.role === "admin") {
           redirectTo("/admin/overview");
         } else {
           redirectTo("/");
         }
       } else {
-        // 7. Si hay un error, mostrar mensaje
+        // 8. Si hay un error, mostrar mensaje
         console.error("Error de inicio de sesión:", response.message);
         showToastError(response.message);
         setGeneralError(response.message);

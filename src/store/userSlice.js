@@ -10,13 +10,17 @@ export const createUserSlice = (set, get) => ({
     phone: "123456789",
     address: "123 Main St",
     role: "student",
-    imgUrl: "/public/my_beloved.jpg",
+    imgUrl: "/public/waifu.jpg",
     loggedIn: false,
   },
   setUser: (user) => set((state) => ({ user: { ...state.user, ...user } })),
   setName: (name) => set((state) => ({ user: { ...state.user, name } })),
   clearUser: () => set({ user: null }),
   isLoggedIn: () => get().user?.loggedIn || false,
+  logout: () =>
+    set((state) => ({
+      user: { ...state.user, loggedIn: false },
+    })),
   getUser: () => get().user,
   updateUser: (newUser) =>
     set((state) => ({ user: { ...state.user, ...newUser } })),
@@ -25,4 +29,3 @@ export const createUserSlice = (set, get) => ({
 
 // Standalone store for backward compatibility
 export const useUserStore = create(createUserSlice);
-

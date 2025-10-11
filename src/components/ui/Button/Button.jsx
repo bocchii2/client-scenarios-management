@@ -36,7 +36,7 @@ const Button = ({
       }
       ${
         variant === "info" &&
-        "  bg-indigo-500 text-indigo-800 hover:bg-indigo-600"
+        "  bg-indigo-500 text-white hover:bg-indigo-600"
       }
       ${disabled && "cursor-default opacity-50"}
       cursor-pointer 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useCombinedStore } from "../../../store/userInstituteBounded";
-const Avatar = ({ size = "small", draggable = false }) => {
+const Avatar = ({ size = "small", draggable = false, image = "" }) => {
   const [avatarUrl, setAvatarUrl] = useState("");
   const user = useCombinedStore((state) => state.user);
 

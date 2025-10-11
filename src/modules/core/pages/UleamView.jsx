@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "../../../components/ui/card/Card";
 import CardHeader from "../../../components/ui/card/CardHeader";
 import CardBody from "../../../components/ui/card/CardBody";

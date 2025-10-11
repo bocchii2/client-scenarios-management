@@ -12,6 +12,9 @@ import RegisterView from "./modules/auth/pages/RegisterView";
 import AuthLayout from "./modules/auth/AuthLayout";
 import AdminOverviewView from "./modules/admin/pages/AdminOverviewView";
 import AdminLayout from "./modules/admin/AdminLayout";
+import UsersView from "./modules/admin/pages/UsersView";
+import RolesView from "./modules/admin/pages/RolesView";
+import PermissionsView from "./modules/admin/pages/PermissionsView";
 
 const App = () => {
   /*   // Lazy load the components
@@ -30,7 +33,16 @@ const App = () => {
           <Route path="admin" element={<AdminLayout />}>
             <Route path="overview" element={<AdminOverviewView />} />
             <Route path="places" element={<div>Places</div>} />
-            <Route path="users" element={<div>Users</div>} />
+            <Route path="users" element={<UsersView />} />
+            <Route path="roles" element={<RolesView />} />
+            <Route path="permissions" element={<PermissionsView />} />
+            <Route path="cargos" element={<div>Cargos</div>} />
+            <Route path="departments" element={<div>Departments</div>} />
+            <Route path="events" element={<div>Events</div>} />
+            <Route path="services" element={<div>Services</div>} />
+            <Route path="schedules" element={<div>Schedules</div>} />
+            <Route path="equipment" element={<div>Equipment</div>} />
+            <Route path="analytics" element={<div>Analytics</div>} />
             <Route path="requests" element={<div>Requests</div>} />
             <Route path="settings" element={<div>Settings</div>} />
           </Route>
@@ -60,7 +72,7 @@ const App = () => {
           </Route>
         </Routes>
       </NotificationProvider>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 };
 
