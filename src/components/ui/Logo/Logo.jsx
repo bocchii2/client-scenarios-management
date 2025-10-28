@@ -26,7 +26,7 @@ const Logo = ({ size = "medium", color = "gray-700", className = "" }) => {
       case "medium":
         return {
           container: "flex flex-row items-center justify-start gap-3 p-2",
-          image: "h-12 w-12 rounded-full border border-gray-200",
+          image: "h-12 w-12 rounded-full ",
           text: `text-2xl font-semibold ${textColor}`,
           showText: true
         };
@@ -53,15 +53,15 @@ const Logo = ({ size = "medium", color = "gray-700", className = "" }) => {
     <div className={`${styles.container} ${className} rounded-lg`}>
       <div className="relative">
         <img
-          src="/mambo.png"
-          alt="Mambo Logo"
-          className={`${styles.image} object-cover shadow-sm transition-transform `}
+          src="/react.svg"
+          alt="Logo"
+          className={`${styles.image} object-contain transition-transform animate-pulse `}
         />
       </div>
       {styles.showText && (
         <div className={size === "large" ? "text-center" : ""}>
           <h2 className={`${styles.text} select-none tracking-tight text-gray-700`}>
-            Mambo
+            Escenarios
           </h2>
           {size === "large" && (
             <p className={`text-sm ${colorMap[color] || `text-${color}`} opacity-75 mt-1`}>

@@ -9,9 +9,10 @@ import {
 
 export const CategoryIcons = {
   "Panel Principal": MdDashboard,
-  "Gestión de Usuarios": MdPeople,
-  Analytics: MdAnalytics,
+  Gestión: MdPeople,
+  Análisis: MdAnalytics,
   Recursos: MdPlace,
   Sistema: MdSettings,
   Navegación: MdWeb,
+  Organización: MdPlace,
 };

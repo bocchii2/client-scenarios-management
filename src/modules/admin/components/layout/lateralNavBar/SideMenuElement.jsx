@@ -1,5 +1,4 @@
 import React from "react";
-import AlterDot from "../../ui/AlterDot";
 
 const SideMenuElement = ({ alert, isSelect, label, onClick }) => {
   return (
@@ -13,7 +12,7 @@ const SideMenuElement = ({ alert, isSelect, label, onClick }) => {
         }`}
     >
       <span className="truncate">{label}</span>
-      {alert && <AlterDot />}
+
     </div>
   );
 };

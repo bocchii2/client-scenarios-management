@@ -1,40 +1,94 @@
 import { useState, useMemo } from 'react';
 import { MdAdd, MdRefresh } from 'react-icons/md';
 import Button from '../../../components/ui/Button/Button';
-import UsersTable from '../components/users/UsersTable';
-import UsersFilters from '../components/users/UsersFilters';
-import useFilteredUsers from '../hooks/useFilterUsers';
-import NewUserModal from '../components/users/NewUserModal';
-import EditUserModal from '../components/users/EdtitUserModal';
-import ViewUserModal from '../components/users/ViewUserModal';
-import DeleteUserModal from '../components/users/DeleteUserModal';
+import NewUserModal from '../components/users/modal/CreateUserModal';
+import UserTable from '../components/users/table/UserTable';
 
+/* const usuarioData = [
+  {
+    id: 1,
+    name: "Juan Pérez Reyes",
+    email: "juan.perez@example.com",
+    departamento: {
+      name: "Ventas",
+      description: "Departamento de ventas",
+      nomenclatura: "VTA",
+      id: 1
+    },
+    role: {
+      name: "Administrador",
+      description: "Usuario con permisos de administrador",
+      id: 1
+    },
+    cargo: {
+      name: "Gerente de Ventas",
+      description: "Responsable del equipo de ventas",
+      id: 1
+    },
+    identificacion: "123456789",
+    status: "Activo",
+    tipoIdentificacion: "Cédula",
+    createdAt: "2023-10-01",
+  },
+  {
+    id: 2,
+    name: "Vannesa María Gómez López",
+    email: "maria.gomez@example.com",
+    identificacion: "987654321",
+    status: "Inactivo",
+    tipoIdentificacion: "Pasaporte",
+    createdAt: "2023-10-02",
+    role: {
+      name: "Usuario",
+      description: "Usuario con permisos limitados",
+      id: 2
+    },
+    cargo: {
+      name: "Ejecutivo de Ventas",
+      description: "Responsable de la atención al cliente",
+      id: 2
+    },
+    departamento: {
+      name: "Ventas",
+      description: "Departamento de investigación y desarrollo",
+      nomenclatura: "ID",
+      id: 1
+    }
+  },
+  {
+    id: 3,
+    name: "Billie Eilish Pirate O'Connell",
+    email: "billie.eilish@example.com",
+    identificacion: "456789123",
+    status: "Activo",
+    tipoIdentificacion: "Cédula",
+    createdAt: "2023-10-03",
+    role: {
+      name: "Administrador",
+      description: "Usuario con permisos de administrador",
+      id: 2
+    },
+    cargo: {
+      name: "Artista",
+      description: "Responsable de la creación musical",
+      id: 2
+    },
+    departamento: {
+      name: "Música",
+      description: "Departamento de producción musical",
+      nomenclatura: "MUS",
+      id: 1
+    }
+  }
+]; */
+
+const usuarioData = [];
 const UsersView = () => {
   // estado único para modales: { name: 'add' | 'edit' | 'delete' | null, payload: any }
   const [modal, setModal] = useState({ name: null, payload: null });
 
   const openModal = (name, payload = null) => setModal({ name, payload });
   const closeModal = () => setModal({ name: null, payload: null });
-
-
-  // Handlers para acciones de la tabla
-  const handleEditUser = (user) => {
-    console.log('Editar usuario:', user);
-    // TODO: Implementar modal de edición
-    openModal("edit", user);
-  };
-
-  const handleDeleteUser = (user) => {
-    console.log('Eliminar usuario:', user);
-    // TODO: Implementar confirmación y eliminación
-    openModal("delete", user);
-  };
-
-  const handleViewUser = (user) => {
-    console.log('Ver detalles del usuario:', user);
-    // TODO: Implementar modal de detalles
-    openModal("view", user);
-  };
 
   const handleAddUser = () => {
     // TODO: Implementar modal de creación
@@ -53,25 +107,6 @@ const UsersView = () => {
         isOpen={modal.name === "add"}
         onClose={closeModal}
         title="Agregar Nuevo Usuario"
-      />
-      <EditUserModal
-        isOpen={modal.name === "edit"} // Cambiar según la lógica de edición
-        user={modal.payload} // Pasar el usuario a editar
-        onClose={closeModal}
-        title="Editar Usuario"
-      />
-      <ViewUserModal
-        isOpen={modal.name === "view"} // Cambiar según la lógica de visualización
-        user={modal.payload} // Pasar el usuario a ver
-        onClose={closeModal}
-        title="Detalles del Usuario"
-      />
-
-      <DeleteUserModal
-        isOpen={modal.name === "delete"} // Cambiar según la lógica de eliminación
-        user={modal.payload} // Pasar el usuario a eliminar
-        onClose={closeModal}
-        title="Eliminar Usuario"
       />
 
       {/* Header */}
@@ -102,25 +137,7 @@ const UsersView = () => {
         </div>
       </div>
 
-      {/* Filtros y búsqueda */}
-      <UsersFilters
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-        roleFilter={roleFilter}
-        onRoleChange={setRoleFilter}
-        statusFilter={statusFilter}
-        onStatusChange={setStatusFilter}
-        resultsCount={filteredUsers.length}
-      />
-
-      {/* Tabla de usuarios */}
-      <UsersTable
-        users={filteredUsers}
-        onEdit={handleEditUser}
-        onDelete={handleDeleteUser}
-        onView={handleViewUser}
-      />
-
+      <UserTable users={usuarioData} />
     </div>
   );
 };

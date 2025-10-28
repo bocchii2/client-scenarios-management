@@ -20,7 +20,7 @@ const Button = ({
       className={`
       w-full py-2 px-4 rounded-md flex items-center justify-center gap-2
       ${loading && "cursor-default bg-gray-400 text-white hover:bg-gray-400"}
-      ${disabled && "cursor-default opacity-50 text-white "}
+      ${disabled && "cursor-default opacity-50 text-white bg-gray-400 hover:bg-gray-400"}
       ${size === "small" && "text-sm "}
       ${size === "medium" && "text-base"}
       ${size === "large" && "text-lg"}
@@ -30,14 +30,12 @@ const Button = ({
       ${variant === "secondary" && "text-white bg-gray-500 hover:bg-gray-600"}
       ${variant === "success" && "text-white  bg-green-500 hover:bg-green-600"}
       ${variant === "danger" && "text-white  bg-red-500 hover:bg-red-600"}
-      ${
-        variant === "warning" &&
+      ${variant === "warning" &&
         "  bg-yellow-500 text-yellow-800 hover:bg-yellow-600"
-      }
-      ${
-        variant === "info" &&
+        }
+      ${variant === "info" &&
         "  bg-indigo-500 text-white hover:bg-indigo-600"
-      }
+        }
       ${disabled && "cursor-default opacity-50"}
       cursor-pointer 
     `}

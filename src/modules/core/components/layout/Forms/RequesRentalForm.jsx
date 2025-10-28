@@ -9,37 +9,50 @@ import { Link } from "react-router-dom";
 import { FaCalendar, FaFile } from "react-icons/fa6";
 import TermsAndCoditionDialog from "./TermsAndCoditionDialog";
 import useModal from "../../../hooks/useModal";
-import { useCombinedStore } from "../../../../../store/userInstituteBounded";
+// ...reemplazo: usar el store de auth como fuente única de verdad
+import { useAuthStore } from "../../../../../store/useStore";
 
 const RequesRentalForm = ({ isOpen, closeModal, title, scenario }) => {
-  const DISABLED_STUDENT_AND_PLACE_DATA = true; // cambiar a true para deshabilitar los inputs
+  const [scenarioDetails, setScenarioDetails] = React.useState(scenario || {});
+  const DISABLED_STUDENT_AND_PLACE_DATA = true;
   const {
     closeModal: closeTermsAndCoditionModal,
     isOpen: isOpenTermsAndCoditionModal,
     openModal: openTermsAndCoditionModal,
   } = useModal();
-  // usar el servicio para consular el lugar por id
-  const user = useCombinedStore((state) => state.user);
+
+  console.log("Escenario recibido en el formulario:", scenario);
+
+  // usar el auth store (fuente única) para obtener el usuario logueado
+  const user = useAuthStore((s) => s.user) || {};
+  console.log("Usuario desde el store de auth:", user);
+
   const { formData, errors, handleChange, handleSubmit, loading, cleanErrors } =
     useForm(
       {
         userData: {
-          userId: user.id,
-          name: user.name,
-          lastname: user.lastname,
-          email: user.email,
-          phone: user.phone,
-          address: user.address,
+          userId: user.id || "",
+          name: user.nombres_completos,
+          email: user.email || user.correo_electronico || "",
+          phone: user.phone || user.telefono || "",
+          address: user.direccion || "",
         },
         scenarioData: {
-          scenarioId: scenario.id,
-          scenarioName: scenario.name,
+          scenarioId: scenarioDetails.id,
+          scenarioName: scenarioDetails.name,
         },
         eventTitle: "",
+        eventType: "",
         descriptionEvent: "",
-        eventPropose: "",
+        numberOfAttendees: "",
         startDate: "",
         endDate: "",
+        startTime: "",
+        endTime: "",
+        estimatedDuration: "",
+        requerePrevMontage: false,
+        dateToMontage: "", // si se requiere montaje previo, este campo se utiliza si requiere montaje
+        timeToMontage: "", // hora de montaje, si aplica, este campo se utiliza si requiere montaje
         termsAndConditions: false,
       },
       true
@@ -67,16 +80,6 @@ const RequesRentalForm = ({ isOpen, closeModal, title, scenario }) => {
               error={errors.name}
               disabled={DISABLED_STUDENT_AND_PLACE_DATA}
             />
-            <Input
-              value={formData.userData.lastname}
-              onChange={handleChange}
-              name="lastname"
-              label="Apellido completo"
-              placeholder="Apellido completo"
-              id={"lastname"}
-              error={errors.lastname}
-              disabled={DISABLED_STUDENT_AND_PLACE_DATA}
-            />
           </div>
           <div className="flex flex-col md:flex-row gap-1">
             <Input
@@ -102,21 +105,32 @@ const RequesRentalForm = ({ isOpen, closeModal, title, scenario }) => {
               disabled={DISABLED_STUDENT_AND_PLACE_DATA}
             />
           </div>
+          <div className="flex flex-col md:flex-row gap-1">
+
+
+          </div>
           <Separator color={"gray"} />
           <div>
             <h2 className="text-sm font-bold text-gray-700 pb-5">
-              Datos del escenario
+              Datos del espacio
             </h2>
             <Input
               value={formData.scenarioData.scenarioName}
               onChange={handleChange}
               name="scenarioName"
-              label="Nombre del escenario"
-              placeholder="Nombre del escenario"
+              label="Nombre del Espacio"
+              placeholder="Nombre del espacio"
               id={"scenarioName"}
               error={errors.scenarioName}
               disabled={DISABLED_STUDENT_AND_PLACE_DATA}
             />
+            <div>
+              <h2 className="text-sm font-light text-gray-700 pb-5">
+                Prestaciones del espacio:
+              </h2>
+              <div className="p-4">
+              </div>
+            </div>
           </div>
           <Separator color={"gray"} />
           <div>

@@ -18,27 +18,32 @@ class ApiService {
   }
 
   async get(endpoint) {
-    const response = await this.api.get(endpoint);
+    console.log("GET", endpoint);
+    const response = await this.axiosInstance.get(endpoint);
     return response.data;
   }
 
   async post(endpoint, data) {
-    const response = await this.api.post(endpoint, data);
+    console.log("POST", endpoint, data);
+    const response = await this.axiosInstance.post(endpoint, data);
     return response.data;
   }
 
   async put(endpoint, data) {
-    const response = await this.api.put(endpoint, data);
+    console.log("PUT", endpoint, data);
+    const response = await this.axiosInstance.put(endpoint, data);
     return response.data;
   }
 
   async delete(endpoint) {
-    const response = await this.api.delete(endpoint);
+    console.log("DELETE", endpoint);
+    const response = await this.axiosInstance.delete(endpoint);
     return response.data;
   }
 
   async patch(endpoint, data) {
-    const response = await this.api.patch(endpoint, data);
+    console.log("PATCH", endpoint, data);
+    const response = await this.axiosInstance.patch(endpoint, data);
     return response.data;
   }
 }

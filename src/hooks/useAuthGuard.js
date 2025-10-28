@@ -1,112 +1,49 @@
-import { useEffect } from "react";
-import { useUserStore } from "../store/userSlice";
-import useRedirection from "../modules/core/hooks/useRedirection";
+import { useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/useStore";
 
-const useAuthGuard = () => {
-  const { user, setUser, logout } = useUserStore();
-  const { redirectTo } = useRedirection();
+/**
+ * useAuthGuard(options)
+ * options: { redirectTo, redirectIfAuthenticated = true, redirectIfNotAuthenticated = false }
+ * Devuelve { user, isAuthenticated, setAuth, clearAuth } (delegado al useAuthStore)
+ */
+export default function useAuthGuard(options = {}) {
+  const navigate = useNavigate();
+  const {
+    redirectTo = null,
+    redirectIfAuthenticated = false,
+    redirectIfNotAuthenticated = false,
+  } = options;
 
-  // Guardar usuario en localStorage
-  const saveUserToStorage = (userData) => {
-    try {
-      localStorage.setItem(
-        "user_session",
-        JSON.stringify({
-          ...userData,
-          loggedIn: true,
-          timestamp: Date.now(),
-        })
-      );
-    } catch (error) {
-      console.error("Error saving user to localStorage:", error);
-    }
-  };
+  const user = useAuthStore((s) => s.user);
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const setAuth = useAuthStore((s) => s.setAuth);
+  const clearAuth = useAuthStore((s) => s.clearAuth);
 
-  // Obtener usuario de localStorage
-  const getUserFromStorage = () => {
-    try {
-      const storedUser = localStorage.getItem("user_session");
-      if (storedUser) {
-        const userData = JSON.parse(storedUser);
-
-        // Verificar si la sesión no ha expirado (opcional: 24 horas)
-        const isExpired = Date.now() - userData.timestamp > 24 * 60 * 60 * 1000;
-
-        if (isExpired) {
-          clearUserFromStorage();
-          return null;
-        }
-
-        return userData;
-      }
-      return null;
-    } catch (error) {
-      console.error("Error getting user from localStorage:", error);
-      clearUserFromStorage();
-      return null;
-    }
-  };
-
-  // Limpiar usuario de localStorage
-  const clearUserFromStorage = () => {
-    try {
-      localStorage.removeItem("user_session");
-    } catch (error) {
-      console.error("Error clearing user from localStorage:", error);
-    }
-  };
-
-  // Login: actualizar estado y localStorage
-  const login = (userData) => {
-    const userWithLogin = { ...userData, loggedIn: true };
-    setUser(userWithLogin);
-    saveUserToStorage(userWithLogin);
-  };
-
-  // Logout: limpiar estado y localStorage
-  const handleLogout = () => {
-    logout();
-    clearUserFromStorage();
-    redirectTo("/auth/login");
-  };
-
-  // Verificar autenticación al cargar el hook
-  const checkAuthentication = () => {
-    const storedUser = getUserFromStorage();
-
-    if (storedUser) {
-      // Usuario encontrado en localStorage, actualizar estado
-      setUser(storedUser);
-      return true;
-    } else {
-      // No hay usuario, redirigir al login
-      redirectTo("/auth/login");
-      return false;
-    }
-  };
-
-  // Auto-verificación cuando el componente se monta
+  // Run redirects on mount / when auth changes
   useEffect(() => {
-    // Solo verificar si el usuario no está logueado en el estado
-    if (!user?.loggedIn) {
-      checkAuthentication();
+    if (redirectTo) {
+      if (redirectIfAuthenticated && isAuthenticated) {
+        navigate(redirectTo, { replace: true });
+      } else if (redirectIfNotAuthenticated && !isAuthenticated) {
+        navigate(redirectTo, { replace: true });
+      }
     }
-  }, []);
-
-  // Verificar si el usuario está autenticado
-  const isAuthenticated = () => {
-    return user?.loggedIn || getUserFromStorage() !== null;
-  };
-
-  return {
-    user,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
     isAuthenticated,
-    login,
-    logout: handleLogout,
-    checkAuthentication,
-    saveUserToStorage,
-    clearUserFromStorage,
-  };
-};
+    redirectTo,
+    redirectIfAuthenticated,
+    redirectIfNotAuthenticated,
+  ]);
 
-export default useAuthGuard;
+  const logout = useCallback(() => {
+    clearAuth();
+    if (redirectTo) {
+      navigate(redirectTo, { replace: true });
+    }
+  }, [clearAuth]);
+
+  // expose store-backed API
+  return { user, isAuthenticated, setAuth, clearAuth, logout };
+}

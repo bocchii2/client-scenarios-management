@@ -1,9 +1,8 @@
 import React from "react";
-import { useCombinedStore } from "../../../../../store/userInstituteBounded";
 import Avatar from "../../../../../components/ui/avatar/Avatar";
-
+import useAuthGuard from "../../../../../hooks/useAuthGuard";
 const ProfileUser = ({ onClick }) => {
-  const user = useCombinedStore((state) => state.user);
+  const { user } = useAuthGuard();
   return (
     <div
       className="flex items-center gap-3 border p-2 rounded-lg bg-transparent hover:bg-gray-800 transition-colors cursor-pointer"

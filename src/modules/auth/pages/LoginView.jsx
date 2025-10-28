@@ -18,18 +18,17 @@ const LoginView = () => {
         </p>
         <LoginForm />
         <div className="text-center my-5">
-          <p className="text-gray-600 text-sm font-bold">
-            Si no tienes una cuenta y no eres miembro de la comunidad
-            universitaria
+          <p className="text-gray-600 text-sm font-light mb-2">
+            Si no tienes una cuenta
           </p>
           <Link
-            className="text-gray-700 font-bold hover:underline"
+            className="text-gray-700 font-bold hover:underline text-1xl"
             to="/auth/register"
           >
             Registrate
           </Link>
         </div>
-        <div className="relative my-5 w-full">
+        {/*         <div className="relative my-5 w-full">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-gray-600" />
           </div>
@@ -48,7 +47,7 @@ const LoginView = () => {
             type="button"
             icon={<FaMicrosoft size={20} className="text-white" />}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

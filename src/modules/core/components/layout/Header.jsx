@@ -4,18 +4,14 @@ import ProfileUser from "./profile/ProfileUserCard";
 import Button from "../../../../components/ui/Button/Button";
 import { FaX } from "react-icons/fa6";
 import { FaBars } from "react-icons/fa";
-import { useCombinedStore } from "../../../../store/userInstituteBounded";
+import useAuthGuard from "../../../../hooks/useAuthGuard";
 
 const Header = () => {
   const navigate = useNavigate();
-  const user = useCombinedStore((state) => state.user);
+  const { user, isAuthenticated } = useAuthGuard();
 
   const handleProfileClick = () => {
-    if (user.role === "admin") {
-      navigate("/admin/overview");
-    } else {
-      navigate("/user/profile");
-    }
+    navigate('/admin/overview');
   };
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,10 +22,10 @@ const Header = () => {
     <header className="w-full bg-[rgb(16,105,165)] text-white shadow-md">
       <div className="flex items-center justify-between px-4 pt-5">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold">Manta Convenciones</h1>
+          <h1 className="text-2xl md:text-3xl font-bold">Espacios ULEAM</h1>
           <p className="text-sm font-light">El mejor lugar para tus eventos</p>
         </div>
-        {user.loggedIn && <ProfileUser onClick={handleProfileClick} />}
+        {isAuthenticated && <ProfileUser onClick={handleProfileClick} />}
       </div>
 
       <div className="flex items-center justify-between px-4 py-3 md:px-7 md:py-4">
@@ -61,7 +57,7 @@ const Header = () => {
         </nav>
         {/* Botones Login/Perfil Desktop */}
         <div className="hidden md:flex gap-2 items-center">
-          {!user.loggedIn && (
+          {!isAuthenticated && (
             <>
               <Button
                 variant="link"
@@ -118,8 +114,8 @@ const Header = () => {
           </Link>
 
           {/* Botones Login/Perfil Mobil */}
-          {user.loggedIn ? (
-            <ProfileUser />
+          {isAuthenticated ? (
+            <ProfileUser onClick={handleProfileClick} />
           ) : (
             <>
               <Button

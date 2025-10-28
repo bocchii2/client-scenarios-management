@@ -3,10 +3,17 @@ export const SideMenuOptions = [
     category: "Panel Principal",
     items: [
       { label: "Información", isSelect: true, alert: false, route: "overview" },
+      { label: "Solicitudes", isSelect: false, alert: true, route: "requests" },
+      {
+        label: "Notificaciones",
+        isSelect: false,
+        alert: true,
+        route: "notifications",
+      },
     ],
   },
   {
-    category: "Gestión de Usuarios",
+    category: "Gestión",
     items: [
       { label: "Usuarios", isSelect: false, alert: true, route: "users" },
       { label: "Roles", isSelect: false, alert: false, route: "roles" },
@@ -36,22 +43,15 @@ export const SideMenuOptions = [
     ],
   },
   {
-    category: "Analytics",
-    items: [
-      {
-        label: "Analíticas",
-        isSelect: false,
-        alert: false,
-        route: "analytics",
-      },
-    ],
-  },
-  {
     category: "Recursos",
     items: [
       { label: "Espacios", isSelect: false, alert: false, route: "places" },
-      { label: "Solicitudes", isSelect: false, alert: true, route: "requests" },
-      { label: "Horarios", isSelect: false, alert: false, route: "schedules" },
+      {
+        label: "Horarios y Tarifas",
+        isSelect: false,
+        alert: false,
+        route: "schedules",
+      },
       {
         label: "Eventos internos",
         isSelect: false,

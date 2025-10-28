@@ -1,14 +1,14 @@
 import Avatar from "../../../components/ui/avatar/Avatar";
-import { useCombinedStore } from "../../../store/userInstituteBounded";
-import useAuthGuard from "../../../hooks/useAuthGuard";
+import { useAuthStore } from "../../../store/useStore";
+import userAdapter from "../adapters/UserAdapter";
 
 const AdminOverviewView = () => {
   // Get all data from the combined store
-  const { user: authUser } = useAuthGuard();
-  const institution = useCombinedStore((state) => state.institution);
+  const authUser = useAuthStore((s) => s.user);
+  const loggedIn = useAuthStore((s) => s.isAuthenticated);
+  const adaptedUser = userAdapter(authUser);
+  console.log("User data:", adaptedUser);
 
-  console.log("User data:", authUser);
-  console.log("Institution data:", institution);
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Informacion General</h1>
@@ -30,36 +30,36 @@ const AdminOverviewView = () => {
           {authUser ? (
             <div className="space-y-3">
               <div className="flex justify-between">
-                <span className="font-medium text-gray-700">Name:</span>
+                <span className="font-medium text-gray-700">Nombres completos:</span>
                 <span className="text-gray-900">
-                  {authUser.name} {authUser.lastname}
+                  {adaptedUser.fullName ? adaptedUser.fullName : <p>No definido</p>}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="font-medium text-gray-700">Email:</span>
-                <span className="text-gray-900">{authUser.email}</span>
+                <span className="font-medium text-gray-700">Correo Electronico:</span>
+                <span className="text-gray-900">{adaptedUser.email ? adaptedUser.email : <p>No definido</p>}</span>
               </div>
               <div className="flex justify-between">
-                <span className="font-medium text-gray-700">Phone:</span>
-                <span className="text-gray-900">{authUser.phone}</span>
+                <span className="font-medium text-gray-700">Telefono:</span>
+                <span className="text-gray-900">{adaptedUser.phone ? adaptedUser.phone : <p>No definido</p>}</span>
               </div>
               <div className="flex justify-between">
-                <span className="font-medium text-gray-700">Address:</span>
-                <span className="text-gray-900">{authUser.address}</span>
+                <span className="font-medium text-gray-700">Direccion:</span>
+                <span className="text-gray-900">{adaptedUser.address ? adaptedUser.address : <p>No definido</p>}</span>
               </div>
               <div className="flex justify-between">
-                <span className="font-medium text-gray-700">Role:</span>
-                <span className="text-gray-900 capitalize">{authUser.role}</span>
+                <span className="font-medium text-gray-700">Rol del usuario:</span>
+                <span className="text-gray-900 capitalize">{adaptedUser.roleSlugs ? adaptedUser.roleSlugs.join(", ") : <p>No definido</p>}</span>
               </div>
               <div className="flex justify-between">
-                <span className="font-medium text-gray-700">Status:</span>
+                <span className="font-medium text-gray-700">Estado:</span>
                 <span
-                  className={`px-2 py-1 rounded-full text-sm ${authUser.loggedIn
+                  className={`px-2 py-1 rounded-full text-sm ${loggedIn
                     ? "bg-green-100 text-green-800"
                     : "bg-red-100 text-red-800"
                     }`}
                 >
-                  {authUser.loggedIn ? "Logged In" : "Not Logged In"}
+                  {loggedIn ? "Sesion Activa" : "No Conectado"}
                 </span>
               </div>
             </div>
@@ -75,35 +75,26 @@ const AdminOverviewView = () => {
           </h2>
           <div className="space-y-3">
             <div className="flex justify-between">
-              <span className="font-medium text-gray-700">Institution:</span>
-              <span className="text-gray-900 uppercase">
-                {institution.name}
+              <span className="font-medium text-gray-700">Departamento:</span>
+              <span className="text-gray-900 uppercase text-end">
+                {adaptedUser.departamento.name} - {adaptedUser.departamento.nomenclature}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="font-medium text-gray-700">Career:</span>
-              <span className="text-gray-900">{institution.carrer}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-medium text-gray-700">Position:</span>
-              <span className="text-gray-900">{institution.position}</span>
+              <span className="font-medium text-gray-700">Cargo:</span>
+              <span className="text-gray-900">
+                {adaptedUser.cargo.name ? adaptedUser.cargo.name : <p>No definido</p>}
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="font-medium text-gray-700">
-                Short Faculty Name: 
+                Nomenclatura:
               </span>
               <span className="text-gray-900">
-                {institution.shortFacultyName}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-medium text-gray-700">Faculty:</span>
-              <span className="text-gray-900 text-end">
-                {institution.faculty}
+                {adaptedUser.departamento.nomenclature ? adaptedUser.departamento.nomenclature : <p>No definido</p>}
               </span>
             </div>
           </div>
-
         </div>
       </div>
     </div>

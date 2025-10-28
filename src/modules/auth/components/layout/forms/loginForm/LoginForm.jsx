@@ -3,14 +3,14 @@ import useForm from "../../../../../core/hooks/useForm";
 import Input from "../../../../../../components/ui/form/input/Input";
 import Checkbox from "../../../../../../components/ui/form/checkbox/Checkbox";
 import Button from "../../../../../../components/ui/Button/Button";
-import { login } from "../../../../services/auth/authService";
-import { showToastError } from "../../../../../../components/ui/Toast/Toast";
 import useRedirection from "../../../../../core/hooks/useRedirection";
+import AuthService from "../../../../services/auth/authService";
 import useAuthGuard from "../../../../../../hooks/useAuthGuard";
 
 const LoginForm = () => {
+
+  const authService = React.useRef(new AuthService());
   const { redirectTo } = useRedirection();
-  const { login: loginWithAuth } = useAuthGuard(); // ✅ Usar el hook de auth
   const [generalError, setGeneralError] = useState("");
   const requiredFields = ["email", "password"];
   let initialFormState = {
@@ -18,6 +18,9 @@ const LoginForm = () => {
     password: "",
     rememberMe: false,
   };
+
+  // proteger página: si ya autenticado redirige al root
+  const { setAuth, user: currentUser } = useAuthGuard({ redirectTo: "/", redirectIfAuthenticated: true });
 
   const {
     formData,
@@ -29,61 +32,43 @@ const LoginForm = () => {
     setLoading,
   } = useForm(initialFormState, false, requiredFields);
 
-  const customSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    cleanErrors(); // Limpia errores anteriores antes de validar
-
     try {
-      setLoading(true); // Inicia el loading
-      setGeneralError(""); // Limpia el error general
-      console.log("Iniciando sesión con:", formData);
+      cleanErrors();
+      setGeneralError("");
+      if (!validateRequiredFields()) return;
 
-      // 1. Validar campos requeridos
-      const isValid = validateRequiredFields();
+      setLoading(true);
+      const resp = await authService.current.login(formData.email, formData.password);
+      setLoading(false);
 
-      // 4. Si hay errores personalizados o de campos requeridos, detener
-      if (!isValid) {
-        setLoading(false);
+      if (!resp || resp.success === false) {
+        setGeneralError(resp?.message || "Credenciales inválidas");
         return;
       }
 
-      // 5. Todo bien, enviar formulario usando loginService
-      const response = await login(formData.email, formData.password);
-
-      if (response.success) {
-        // 6. ✅ Usar el hook para manejar login automáticamente
-        console.log("Inicio de sesión exitoso:", response);
-
-        // El hook maneja automáticamente:
-        // - Actualización del estado en Zustand
-        // - Guardado en localStorage
-        // - Marcado como loggedIn: true
-        loginWithAuth(response.user);
-
-        // 7. ✅ Redirigir según el rol del usuario
-        if (response.userRole === "admin" || response.user?.role === "admin") {
-          redirectTo("/admin/overview");
-        } else {
-          redirectTo("/");
-        }
-      } else {
-        // 8. Si hay un error, mostrar mensaje
-        console.error("Error de inicio de sesión:", response.message);
-        showToastError(response.message);
-        setGeneralError(response.message);
-        setLoading(false); // Detener el loading
+      // resp contains { success: true, user, token }
+      const { user, token } = resp;
+      if (!user || !token) {
+        setGeneralError("Respuesta inválida desde el servidor.");
+        return;
       }
+
+      // guarda sesión (sessionStorage o localStorage según rememberMe)
+      setAuth(user, token, formData.rememberMe);
+
+      // redirigir
+      redirectTo("/");
     } catch (error) {
-      setLoading(false); // Detener el loading
-      setGeneralError(
-        "Error al iniciar sesión. Por favor, inténtelo de nuevo."
-      );
-      console.error("Error al iniciar sesión:", error);
+      console.error("Unexpected error during login:", error);
+      setGeneralError("Ocurrió un error inesperado. Por favor, inténtalo de nuevo más tarde.");
+    } finally {
+      setLoading(false);
     }
   };
-
   return (
-    <form onSubmit={customSubmit} className="flex flex-col gap-4">
+    <form onSubmit={onSubmit} className="flex flex-col gap-4">
       <Input
         value={formData.email}
         onChange={handleChange}

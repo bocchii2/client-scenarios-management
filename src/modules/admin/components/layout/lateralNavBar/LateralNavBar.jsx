@@ -7,7 +7,7 @@ import { SideMenuOptions } from "../../../constants/SideMenuOptions";
 import useRedirection from "../../../../core/hooks/useRedirection";
 import useAuthGuard from "../../../../../hooks/useAuthGuard";
 const LateralMenu = () => {
-  const { logout } = useAuthGuard();
+  const { logout } = useAuthGuard({ redirectTo: "/auth/login" });
   const [selected, setSelected] = React.useState("Información");
   const { redirectTo } = useRedirection();
   const handleSelect = (label, route) => {

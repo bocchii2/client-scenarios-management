@@ -18,7 +18,7 @@ import useModal from "../hooks/useModal";
 import RequesRentalForm from "../components/layout/Forms/RequesRentalForm";
 import { useEffect } from "react";
 import NoLoginDialog from "../components/ui/dialog/NoLoginDialog";
-import { useCombinedStore } from "../../../store/userInstituteBounded";
+import useAuthGuard from "../../../hooks/useAuthGuard";
 // import scenarioApi from "../services/apiServices/ScenarioApi";
 
 const ScenarioView = () => {
@@ -31,7 +31,7 @@ const ScenarioView = () => {
     openModal: openRentalFormModal,
   } = useModal();
   // const [scenario, setScenario] = useState(null);
-  const user = useCombinedStore((state) => state.user) || {};
+  const { user } = useAuthGuard();
 
   const scenario = PLACES_DATA.find(
     (place) => place.id === parseInt(idScenario)
@@ -72,8 +72,8 @@ const ScenarioView = () => {
       scenario.status === "Disponible"
         ? "primary"
         : scenario.status === "En mantenimiento"
-        ? "warning"
-        : "danger",
+          ? "warning"
+          : "danger",
     [scenario.status]
   );
 
@@ -117,7 +117,7 @@ const ScenarioView = () => {
             onClick={openRentalFormModal}
             variant="primary"
           />
-          {user.loggedIn ? (
+          {user ? (
             <RequesRentalForm
               closeModal={closeRentalFormModal}
               isOpen={isOpenRentalFormModal}

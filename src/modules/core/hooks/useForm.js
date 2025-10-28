@@ -25,10 +25,24 @@ const useForm = (initialState, allRequired = false, requiredFields = []) => {
   };
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked, options } = e.target;
+    let newValue;
+
+    if (type === "checkbox") {
+      newValue = checked;
+    } else if (type === "select-multiple") {
+      // recoge los valores seleccionados en un array
+      newValue = Array.from(options)
+        .filter((opt) => opt.selected)
+        .map((opt) => opt.value);
+    } else {
+      // select-one y otros tipos usan value
+      newValue = value;
+    }
+
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: newValue,
     }));
   };
 
@@ -54,39 +68,34 @@ const useForm = (initialState, allRequired = false, requiredFields = []) => {
     return Object.keys(newErrors).length === 0; // true si está todo válido
   };
 
-  // enviar el formulario a la API
-  /* const submitForm = async () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      showNotification("Formulario enviado", "info");
-      console.log("Formulario enviado", formData);
-    }, 3000);
-  }; */
+  // ejecutar validaciones y callback
+  const handleSubmit = async (e, callback) => {
+    if (e) e.preventDefault();
 
-  // ejecutar validaciones
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // ... extends with other validations
-    // validation 1
-    // validation 2
-    // validation 3
-    // ...
-    // do this at the final
+    cleanErrors(); // limpiar errores previos
+
+    if (!validateRequiredFields()) {
+      return; // si hay errores, detener
+    }
+
+    // si pasa validaciones, ejecutar callback con los datos
+    if (callback && typeof callback === "function") {
+      await callback(formData);
+    }
   };
 
   return {
     formData,
     errors,
     handleChange,
-    handleSubmit, // ejecutar validaciones
+    handleSubmit,
     cleanErrors,
     cleanForm,
-    validateRequiredFields, // ahora disponible para validaciones personalizadas
-    //submitForm, // ahora disponible para ejecuciones controladas, enviar el formulario a la API
+    validateRequiredFields,
     setErrors,
     setLoading,
     loading,
+    setFormData, // <-- exponer para inicializar valores externamente
   };
 };
 
