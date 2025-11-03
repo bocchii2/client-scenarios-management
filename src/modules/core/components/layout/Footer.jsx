@@ -2,10 +2,11 @@ import React from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import UNIVERSITY_COLORS from "../../../../constants/colors";
 
 const Footer = () => {
   return (
-    <div className="w-screen h-auto px-3 bg-[rgb(1,112,185)] text-white flex flex-col justify-around items-center">
+    <div className="w-screen h-auto px-3 text-white flex flex-col justify-around items-center" style={{ backgroundColor: UNIVERSITY_COLORS.primary }}>
       <div>
         <div className="w-screen h-[200px] mt-3 flex items-center justify-between px-[60px]">
           <nav className="flex justify-center items-center gap-2 h-auto ">
@@ -52,7 +53,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="mt-2 bg-[rgb(16,105,165)] w-screen h-[50px] flex items-center justify-center">
+      <div className="mt-2 w-screen h-[50px] flex items-center justify-center" style={{ backgroundColor: UNIVERSITY_COLORS.primary }}>
         <p className="text-white text-xs">
           © 2024 Dirección de Comunicación e Imagen Institucional ULEAM. Todos
           los derechos reservados.

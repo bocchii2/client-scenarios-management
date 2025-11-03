@@ -4,6 +4,7 @@ import SimpleCard from "../components/ui/simpleCard/SimpleCard";
 
 import Carousel from "../components/ui/slider/carousel/Carousel";
 import ContactUs from "../components/layout/ContactUs";
+import UNIVERSITY_COLORS from "../../../constants/colors";
 const HomeView = () => {
   const ScenarioData = [
     {
@@ -86,7 +87,7 @@ const HomeView = () => {
   ];
   return (
     <div className="w-full h-auto p-2 flex flex-col items-center justify-start sm:justify-center">
-      <div className="bg-gray-600 p-6 sm:p-10 rounded-2xl border-white border mt-5 md:mt-0 w-full max-w-screen-lg">
+      <div className="p-6 sm:p-10 rounded-2xl border-white border mt-5 md:mt-0 w-full max-w-screen-lg" style={{ backgroundColor: UNIVERSITY_COLORS.secondary }}>
         <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold text-center">
           Descubre el lugar perfecto para tus eventos
         </h1>
@@ -107,13 +108,18 @@ const HomeView = () => {
       </div>
 
       <div className="py-4 w-full max-w-screen-lg">
-        <h1 className="text-[rgb(58,58,58)] my-6 font-bold text-2xl sm:text-3xl md:text-4xl border-b-2 border-[rgb(16,105,165)] w-full text-start p-2">
+        <h1 className="my-6 font-bold text-2xl sm:text-3xl md:text-4xl border-b-2 w-full text-start p-2"
+          style={{ 
+            color: UNIVERSITY_COLORS.secondary,
+            borderColor: UNIVERSITY_COLORS.primary 
+          }}
+        >
           ¿Dónde comer?
         </h1>
 
         <div className="w-full p-4 flex flex-col justify-center items-center gap-4 mt-2">
           <div className="text-start sm:text-center">
-            <h2 className="text-2xl sm:text-3xl text-[rgb(58,58,58)] font-bold">
+            <h2 className="text-2xl sm:text-3xl font-bold" style={{ color: UNIVERSITY_COLORS.secondary }}>
               Laboratorio gastronómico
             </h2>
             <p className="font-light text-lg sm:text-xl text-[rgb(25,25,25)]">
@@ -127,12 +133,18 @@ const HomeView = () => {
         </div>
 
         <div className="py-4 w-full">
-          <h1 className="text-[rgb(58,58,58)] my-6 font-bold text-2xl sm:text-3xl md:text-4xl border-b-2 border-[rgb(16,105,165)] w-full text-start p-2">
+          <h1 
+            className="my-6 font-bold text-2xl sm:text-3xl md:text-4xl border-b-2 w-full text-start p-2"
+            style={{ 
+              color: UNIVERSITY_COLORS.secondary,
+              borderColor: UNIVERSITY_COLORS.primary 
+            }}
+          >
             Lugares
           </h1>
 
           <div className="p-4 text-start sm:text-center">
-            <h2 className="text-2xl sm:text-3xl text-[rgb(58,58,58)] font-bold">
+            <h2 className="text-2xl sm:text-3xl font-bold" style={{ color: UNIVERSITY_COLORS.secondary }}>
               Espacios para todo tipo de eventos
             </h2>
             <p className="font-light text-lg sm:text-xl text-[rgb(25,25,25)]">
@@ -140,7 +152,7 @@ const HomeView = () => {
             </p>
           </div>
 
-          <div className="p-4 flex flex-col md:flex-row lg:flex-wrap gap-4 justify-center items-center">
+          <div className="p-4 flex flex-col md:flex-row lg:flex-row gap-4 justify-center items-stretch overflow-x-auto items-center">
             {ScenarioData.map((scenario) => (
               <SimpleCard
                 key={scenario.id}

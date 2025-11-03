@@ -11,16 +11,17 @@ import ContactUs from "../components/layout/ContactUs";
 import useRedirection from "../hooks/useRedirection";
 import Breadcrum from "../../../components/ui/breadcrums/Breadcrum";
 import useBreadcrums from "../hooks/useBreadcrums";
+import UNIVERSITY_COLORS from "../../../constants/colors";
 
 const UleamView = () => {
   const { redirectToWithId } = useRedirection();
   const { arrayOfUriPath } = useBreadcrums(window.location.pathname);
   return (
     <div className="w-auto h-auto p-2 flex flex-col items-center justify-start sm:justify-center sm:flex-col">
-      <div className="flex gap-1 my-2 bg-white border-b border-gray-200 p-5 w-full">
+      <div className="flex gap-1 my-2 bg-white border-b p-5 w-full" style={{ borderColor: UNIVERSITY_COLORS.secondary }}>
         <Breadcrum arrayOfUriPath={arrayOfUriPath} />
       </div>
-      <div className="bg-gray-600 p-[40px] rounded-2xl border-white border mt-5 md:mt-0 md:w-auto">
+      <div className="p-[40px] rounded-2xl border-white border mt-5 md:mt-0 md:w-auto" style={{ backgroundColor: UNIVERSITY_COLORS.secondary }}>
         <div className="flex flex-col items-center justify-center gap-3">
           <h1 className="text-white font-bold text-center text-xl sm:text-4xl">
             Espacios perfectos para tus eventos con alcance internacional.
@@ -50,10 +51,10 @@ const UleamView = () => {
       </div>
 
       <div className="py-4 w-full">
-        <h1 className="text-gray-700 font-bold text-center text-xl sm:text-4xl">
+        <h1 className="font-bold text-center text-xl sm:text-4xl" style={{ color: UNIVERSITY_COLORS.secondary }}>
           Auditorios, Salas y Plazas.
         </h1>
-        <p className="text-gray-700 font-light text-center text-lg sm:text-2xl">
+        <p className="font-light text-center text-lg sm:text-2xl" style={{ color: UNIVERSITY_COLORS.secondary }}>
           Espacios para cada ocasión, escoge el lugar perfecto según tú
           necesidad.
         </p>
@@ -100,11 +101,11 @@ const UleamView = () => {
           ))}
         </div>
         <div className="py-4 w-full">
-          <h1 className="text-gray-700 font-bold text-center text-xl sm:text-4xl">
+          <h1 className="font-bold text-center text-xl sm:text-4xl" style={{ color: UNIVERSITY_COLORS.secondary }}>
             Centro de Convenciones del Pacifico
           </h1>
           <div className="w-full flex h-auto p-3 rounded overflow-hidden">
-            <div className="w-1/3 h-auto bg-gray-800 flex flex-col items-start justify-between p-5 rounded ">
+            <div className="w-1/3 h-auto flex flex-col items-start justify-between p-5 rounded" style={{ backgroundColor: UNIVERSITY_COLORS.primary }}>
               <h2 className="text-2xl font-bold text-white">
                 Tu evento a Otro Nivel
               </h2>

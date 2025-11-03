@@ -1,0 +1,38 @@
+/**
+ * Configuración de Tailwind CSS v4
+ * Colores institucionales de la universidad
+ * 
+ * Clean Code: Los colores están definidos como custom properties de CSS
+ * para ser reutilizables en toda la aplicación
+ */
+
+@import "tailwindcss";
+
+/* Definir colores institucionales como variables CSS globales */
+:root {
+  /* Colores institucionales - Universidad */
+  --color-university-primary: #004987;      /* Azul institucional */
+  --color-university-primary-dark: #003366; /* Azul oscuro para hover */
+  --color-university-primary-light: #0066B3;/* Azul claro para backgrounds */
+  
+  --color-university-secondary: #4A4A49;    /* Gris institucional */
+  --color-university-secondary-dark: #2A2A29; /* Gris oscuro */
+  --color-university-secondary-light: #6A6A69; /* Gris claro */
+  
+  --color-university-accent: #FF0000;       /* Rojo institucional */
+  --color-university-accent-dark: #CC0000;  /* Rojo oscuro para hover */
+  --color-university-accent-light: #FF3333; /* Rojo claro */
+  
+  /* Mapeo a nombres semánticos (Clean Code - nombres con significado) */
+  --color-primary: var(--color-university-primary);
+  --color-primary-hover: var(--color-university-primary-dark);
+  --color-primary-bg: var(--color-university-primary-light);
+  
+  --color-secondary: var(--color-university-secondary);
+  --color-secondary-hover: var(--color-university-secondary-dark);
+  --color-secondary-light: var(--color-university-secondary-light);
+  
+  --color-danger: var(--color-university-accent);
+  --color-danger-hover: var(--color-university-accent-dark);
+  --color-danger-light: var(--color-university-accent-light);
+}

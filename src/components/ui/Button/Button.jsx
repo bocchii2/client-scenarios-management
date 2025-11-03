@@ -1,4 +1,5 @@
 import React from "react";
+import UNIVERSITY_COLORS from "../../../constants/colors";
 
 const Button = ({
   onClick,
@@ -17,26 +18,33 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
       type={type}
+      style={{
+        // Aplicar colores inline cuando no se usen variantes de Tailwind
+        ...(variant === "primary" && !disabled && !loading && {
+          backgroundColor: UNIVERSITY_COLORS.primary,
+        }),
+        ...(variant === "secondary" && !disabled && !loading && {
+          backgroundColor: UNIVERSITY_COLORS.secondary,
+        }),
+        ...(variant === "danger" && !disabled && !loading && {
+          backgroundColor: UNIVERSITY_COLORS.accent,
+        }),
+      }}
       className={`
-      w-full py-2 px-4 rounded-md flex items-center justify-center gap-2
+      w-full py-2 px-4 rounded-md flex items-center justify-center gap-2 transition-all duration-200
       ${loading && "cursor-default bg-gray-400 text-white hover:bg-gray-400"}
       ${disabled && "cursor-default opacity-50 text-white bg-gray-400 hover:bg-gray-400"}
       ${size === "small" && "text-sm "}
       ${size === "medium" && "text-base"}
       ${size === "large" && "text-lg"}
       ${size === "xlarge" && "text-xl"}
-      ${variant === "link" && " bg-transparent text-inherit hover:underline"}
-      ${variant === "primary" && "text-white bg-[#1069A5] hover:bg-[#37566b]"}
-      ${variant === "secondary" && "text-white bg-gray-500 hover:bg-gray-600"}
-      ${variant === "success" && "text-white  bg-green-500 hover:bg-green-600"}
-      ${variant === "danger" && "text-white  bg-red-500 hover:bg-red-600"}
-      ${variant === "warning" &&
-        "  bg-yellow-500 text-yellow-800 hover:bg-yellow-600"
-        }
-      ${variant === "info" &&
-        "  bg-indigo-500 text-white hover:bg-indigo-600"
-        }
-      ${disabled && "cursor-default opacity-50"}
+      ${variant === "link" && "bg-transparent text-inherit hover:underline"}
+      ${variant === "primary" && "text-white hover:opacity-90"}
+      ${variant === "secondary" && "text-white hover:opacity-90"}
+      ${variant === "success" && "text-white bg-green-500 hover:bg-green-600"}
+      ${variant === "danger" && "text-white hover:opacity-90"}
+      ${variant === "warning" && "bg-yellow-500 text-yellow-800 hover:bg-yellow-600"}
+      ${variant === "info" && "bg-indigo-500 text-white hover:bg-indigo-600"}
       cursor-pointer 
     `}
     >

@@ -5,6 +5,7 @@ import Button from "../../../../components/ui/Button/Button";
 import { FaX } from "react-icons/fa6";
 import { FaBars } from "react-icons/fa";
 import useAuthGuard from "../../../../hooks/useAuthGuard";
+import UNIVERSITY_COLORS from "../../../../constants/colors";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Header = () => {
   const handleRegister = () => navigate("/auth/register");
 
   return (
-    <header className="w-full bg-[rgb(16,105,165)] text-white shadow-md">
+    <header className="w-full text-white shadow-md" style={{ backgroundColor: UNIVERSITY_COLORS.primary }}>
       <div className="flex items-center justify-between px-4 pt-5">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold">Espacios ULEAM</h1>
@@ -38,19 +39,26 @@ const Header = () => {
         <nav className="hidden md:flex gap-2 items-center">
           <Link
             to="/"
-            className="py-2 px-3 hover:bg-white hover:text-[rgb(16,105,165)] transition-all duration-100"
+            className="py-2 px-3 hover:bg-white transition-all duration-100"
+            style={{ ':hover': { color: UNIVERSITY_COLORS.primary } }}
+            onMouseEnter={(e) => e.currentTarget.style.color = UNIVERSITY_COLORS.primary}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
           >
             Inicio
           </Link>
           <Link
             to="/uleam"
-            className="py-2 px-3 hover:bg-white hover:text-[rgb(16,105,165)] transition-all duration-100"
+            className="py-2 px-3 hover:bg-white transition-all duration-100"
+            onMouseEnter={(e) => e.currentTarget.style.color = UNIVERSITY_COLORS.primary}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
           >
             ULEAM
           </Link>
           <Link
             to="/uleam/servicios"
-            className="py-2 px-3 hover:bg-white hover:text-[rgb(16,105,165)] transition-all duration-100"
+            className="py-2 px-3 hover:bg-white transition-all duration-100"
+            onMouseEnter={(e) => e.currentTarget.style.color = UNIVERSITY_COLORS.primary}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
           >
             Servicios
           </Link>
@@ -67,8 +75,10 @@ const Header = () => {
                 type="button"
               />
               <button
-                className="py-2 px-3 rounded border border-white hover:bg-white hover:text-[rgb(16,105,165)] transition-all"
+                className="py-2 px-3 rounded border border-white hover:bg-white transition-all"
                 onClick={handleRegister}
+                onMouseEnter={(e) => e.currentTarget.style.color = UNIVERSITY_COLORS.primary}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
               >
                 Registrarse
               </button>
@@ -129,11 +139,13 @@ const Header = () => {
                 type="button"
               />
               <button
-                className="w-full py-2 border border-white rounded hover:bg-white hover:text-[rgb(16,105,165)] transition-all cursor-pointer"
+                className="w-full py-2 border border-white rounded hover:bg-white transition-all cursor-pointer"
                 onClick={() => {
                   handleRegister();
                   setIsOpen(false);
                 }}
+                onMouseEnter={(e) => e.currentTarget.style.color = UNIVERSITY_COLORS.primary}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
               >
                 Registrarse
               </button>

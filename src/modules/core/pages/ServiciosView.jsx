@@ -2,10 +2,14 @@ import React from "react";
 import ServiceInlineCard from "../components/layout/serviceInlineCard/ServiceInlineCard";
 import { servicesData } from "../services/apiServices/ServicesData";
 import { Link } from "react-router-dom";
+import UNIVERSITY_COLORS from "../../../constants/colors";
 const ServiciosView = () => {
   return (
     <div className="w-full flex flex-col gap-2 p-5">
-      <div className="w-full flex items-center justify-center bg-gray-600 h-[100px] md:h-[100px] rounded-lg transition-all duration-200 ease-in-out">
+      <div 
+        className="w-full flex items-center justify-center h-[100px] md:h-[100px] rounded-lg transition-all duration-200 ease-in-out"
+        style={{ backgroundColor: UNIVERSITY_COLORS.secondary }}
+      >
         <h1 className="font-semibold text-lg md:text-xl md:font-bold lg:text-3xl text-white">
           Todo lo que Necesitas para un Evento Perfecto
         </h1>
@@ -23,7 +27,8 @@ const ServiciosView = () => {
               >
                 <Link
                   to={`/servicios/${service.id}`}
-                  className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition duration-200 ease-in-out w-[250px] text-center"
+                  className="text-white rounded-lg px-4 py-2 hover:opacity-90 transition duration-200 ease-in-out w-[250px] text-center"
+                  style={{ backgroundColor: UNIVERSITY_COLORS.primary }}
                 >
                   Ver más
                 </Link>
