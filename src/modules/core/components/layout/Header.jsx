@@ -105,13 +105,6 @@ const Header = () => {
           >
             Servicios
           </Link>
-          <Link
-            to="/uleam/cotizaciones"
-            className="w-full text-center py-2"
-            onClick={() => setIsOpen(false)}
-          >
-            Cotizaciones
-          </Link>
 
           {/* Botones Login/Perfil Mobil */}
           {isAuthenticated ? (

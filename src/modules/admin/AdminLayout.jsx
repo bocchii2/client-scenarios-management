@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import LateralMenu from "./components/layout/lateralNavBar/LateralNavBar";
+import LateralMenu from "./presentation/components/layout/lateralNavBar/LateralNavBar";
 const AdminLayout = () => {
   return (
     <div className="flex h-screen w-screen overflow-hidden">

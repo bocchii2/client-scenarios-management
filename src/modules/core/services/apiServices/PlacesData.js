@@ -6,7 +6,7 @@ export const PLACES_DATA = [
     subtitle: "Paraninfo Alfonso Aguilar Ruilova.",
     description:
       "Eventos con tecnología de alta calidad multiconexión streaming.  Videoconferencias con sistema de audio y sonido profesional.",
-    imgUrl: "http://localhost:5173/src/assets/carousel-1.svg",
+    imgUrl: "http://localhost:3000/src/assets/carousel-1.svg",
     // available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
     rates: {
@@ -84,7 +84,7 @@ export const PLACES_DATA = [
     subtitle: "Plaza Cultural Centenario.",
     description:
       "El espacio perfecto al aire libre para congregar a un gran público. La Cultura Manteña y la brisa marina en su máximo esplendor.",
-    imgUrl: "http://localhost:5173/src/assets/carousel-2.svg",
+    imgUrl: "http://localhost:3000/src/assets/carousel-2.svg",
     available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
     rates: {
@@ -166,7 +166,7 @@ export const PLACES_DATA = [
     subtitle: "Cinema Auditorio.",
     description:
       "Acogedor y envolvente espacio, ideal para cine foro, conferencias y toda la experiencia del 7 mo arte en 124 butacas.",
-    imgUrl: "http://localhost:5173/src/assets/carousel-3.svg",
+    imgUrl: "http://localhost:3000/src/assets/carousel-3.svg",
     available: false,
     status: "No disponible", // Disponible, No disponible, en mantenimiento, en uso
     rates: {
@@ -242,7 +242,7 @@ export const PLACES_DATA = [
     subtitle: "Estadio Universitario.",
     description:
       "El epicentro de la pasión deportiva y los grandes espectáculos del Pacífico.",
-    imgUrl: "http://localhost:5173/src/assets/carousel-4.svg",
+    imgUrl: "http://localhost:3000/src/assets/carousel-4.svg",
     available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
     rates: {
@@ -322,7 +322,7 @@ export const PLACES_DATA = [
     subtitle: "Laboratorio Gastronómico.",
     description:
       "El Lugar donde tu paladar emprende un viaje ancestral a nuestra gastronomía. El mejor servicio, de la mano de expertos y sus estudiantes.",
-    imgUrl: "http://localhost:5173/src/assets/carousel-5.svg",
+    imgUrl: "http://localhost:3000/src/assets/carousel-5.svg",
     available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
     rates: {
@@ -398,7 +398,7 @@ export const PLACES_DATA = [
     subtitle: "Sala de Concierto Horacio Hidrovo P.",
     description:
       "Un espacio para disfrutar de hermosas sonatas y cultura musical.",
-    imgUrl: "http://localhost:5173/src/assets/carousel-1.svg",
+    imgUrl: "http://localhost:3000/src/assets/carousel-1.svg",
     available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
     rates: {
@@ -472,7 +472,7 @@ export const PLACES_DATA = [
     subtitle: "Carrera de Agropecuaria.",
     description:
       "Espacio Ideal para la desconexión del día a día y sumergirse en capacitaciones multidisciplinares.",
-    imgUrl: "http://localhost:5173/src/assets/carousel-2.svg",
+    imgUrl: "http://localhost:3000/src/assets/carousel-2.svg",
     available: true,
     status: "En mantenimiento", // Disponible, No disponible, en mantenimiento, en uso
     rates: {
@@ -551,7 +551,7 @@ export const PLACES_DATA = [
     subtitle: "Carrera de Odontología",
     description:
       "Acogedor espacio donde la conexión entre el emisor y receptor es más efectiva.",
-    imgUrl: "http://localhost:5173/src/assets/carousel-3.svg",
+    imgUrl: "http://localhost:3000/src/assets/carousel-3.svg",
     available: false,
     status: "No disponible", // Disponible, No disponible, en mantenimiento, en uso
     rates: {
@@ -624,7 +624,7 @@ export const PLACES_DATA = [
     title: "Auditorio",
     subtitle: "Carrera de Comunicación",
     description: "Donde las ideas se convierten en grandes presentaciones.",
-    imgUrl: "http://localhost:5173/src/assets/carousel-4.svg",
+    imgUrl: "http://localhost:3000/src/assets/carousel-4.svg",
     available: true,
     status: "Disponible", // Disponible, No disponible, en mantenimiento, en uso
     rates: {

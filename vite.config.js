@@ -21,6 +21,7 @@ export default defineConfig({
   ],
   // Proxy para redirigir las solicitudes API al backend durante el desarrollo
   server: {
+    port: 3000,
     proxy: {
       "/api": {
         target: "http://127.0.0.1:8000",

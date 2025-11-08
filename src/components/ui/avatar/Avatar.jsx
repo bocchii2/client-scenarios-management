@@ -1,10 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
+import { MdPerson } from "react-icons/md";
 import useAuthGuard from "../../../hooks/useAuthGuard";
+import { getStorageUrl } from "../../../config/storage";
 
 const sizeMap = {
   small: "w-10 h-10",
   medium: "w-16 h-16",
   large: "w-24 h-24",
+};
+
+const iconSizeMap = {
+  small: "w-6 h-6",
+  medium: "w-10 h-10",
+  large: "w-12 h-12",
 };
 
 const Avatar = ({
@@ -23,14 +31,18 @@ const Avatar = ({
   const { user } = useAuthGuard();
 
   const fallback =
-    src || image || user?.imgUrl || "https://i.ibb.co/jPmh0S0C/billie-eilish-1.jpg";
+    src || image || user?.imgUrl;
 
   const [previewUrl, setPreviewUrl] = useState(fallback);
+  const [hasImage, setHasImage] = useState(!!fallback);
 
   useEffect(() => {
     // Mantener sincronizado si cambia src externamente
     if (src || image || user?.imgUrl) {
       setPreviewUrl(src || image || user?.imgUrl);
+      setHasImage(true);
+    } else {
+      setHasImage(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src, image, user?.imgUrl]);
@@ -61,6 +73,7 @@ const Avatar = ({
     // liberar URL anterior si era blob
     if (previewUrl?.startsWith("blob:")) URL.revokeObjectURL(previewUrl);
     setPreviewUrl(nextUrl);
+    setHasImage(true);
     onChange?.(file, nextUrl);
   };
 
@@ -75,18 +88,23 @@ const Avatar = ({
         className={`relative rounded-full border-2 border-gray-300 overflow-hidden
           ${sizeClass}
           ${isInteractive ? "cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500" : "cursor-default"}
+          ${!hasImage ? "bg-gray-200 flex items-center justify-center" : ""}
         `}
         onClick={handlePick}
         onKeyDown={handleKey}
         aria-label={editable ? ariaLabel : "Foto de perfil"}
         aria-disabled={disabled}
       >
-        <img
-          src={previewUrl}
-          draggable={draggable}
-          alt="Foto de perfil"
-          className="w-full h-full object-cover select-none"
-        />
+        {hasImage ? (
+          <img
+            src={previewUrl}
+            draggable={draggable}
+            alt="Foto de perfil"
+            className="w-full h-full object-cover select-none"
+          />
+        ) : (
+          <MdPerson className={`${iconSizeMap[size] || iconSizeMap.small} text-gray-400`} />
+        )}
 
         {editable && (
           <span

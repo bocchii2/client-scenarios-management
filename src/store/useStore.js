@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
-import userAdapter from "../modules/admin/adapters/UserAdapter";
+import userAdapter from "../modules/admin/intrastructure/adapters/UserAdapter";
 
 /* ...existing code... */
 // Claves de storage
